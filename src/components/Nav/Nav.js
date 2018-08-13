@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const Nav = () => (
+import { triggerLogout } from '../../redux/actions/loginActions';
+
+class Nav extends Component {
+  
+  logout = () => {
+    this.props.dispatch(triggerLogout());
+    // this.props.history.push('home');
+  }
+
+  render() {
+
+   return (
   <div className="navbar">
     <div>
       <ul>
@@ -36,8 +48,15 @@ const Nav = () => (
           </Link>
         </li>
       </ul>
+      <button
+            onClick={this.logout}
+          >
+            Log Out
+          </button>
     </div>
   </div>
-);
+    );
+  }
+}
 
-export default Nav;
+export default connect()(Nav);
