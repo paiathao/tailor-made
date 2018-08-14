@@ -8,6 +8,8 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
+import ServiceSelector from '../ServiceSelector/ServiceSelector'
+
 const mapStateToProps = state => ({
   user: state.user,
 });
@@ -107,6 +109,7 @@ class NewOrder extends Component {
               minTime={moment().hours(10).minutes(0)}
               maxTime={moment().hours(20).minutes(0)}
               dateFormat="LLL" />
+            <ServiceSelector/>
         </div>
       );
     }
@@ -120,5 +123,4 @@ class NewOrder extends Component {
   }
 }
 
-// this allows us to use <App /> in index.js
 export default connect(mapStateToProps)(NewOrder);
