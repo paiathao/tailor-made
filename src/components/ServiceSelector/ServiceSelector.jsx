@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-// import matchSorter from 'match-sorter'
+import matchSorter from 'match-sorter'
 import { connect } from 'react-redux';
 
 // Import React Table
@@ -19,18 +19,30 @@ class ServiceSelector extends React.Component {
            columns={[
             {
               Header: "Category",
-              accessor: "category"
+              accessor: "category",
+              filterMethod: (filter, rows) =>
+              matchSorter(rows, filter.value, { keys: ["category"] }),
+            filterAll: true
             },
             {
               Header: "Service",
-              accessor: "service"
+              accessor: "service",
+              filterMethod: (filter, rows) =>
+              matchSorter(rows, filter.value, { keys: ["service"] }),
+            filterAll: true
             },
             {
               Header: "Cost",
-              accessor: "cost"
+              accessor: "cost",
+              filterMethod: (filter, rows) =>
+              matchSorter(rows, filter.value, { keys: ["cost"] }),
+            filterAll: true
             },
           ]}
            data={data}
+           filterable
+           defaultPageSize={20}
+           className="-striped -highlight"
            />
       </div>
   );
