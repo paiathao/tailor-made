@@ -75,8 +75,8 @@ class EnhancedTableToolbar extends React.Component {
                             </IconButton>
                         </Tooltip>
                     ) : (
-                            <Tooltip title="Filter list">
-                                <IconButton aria-label="Filter list">
+                            <Tooltip title="Collapse">
+                                <IconButton>
                                     <FilterListIcon />
                                 </IconButton>
                             </Tooltip>
