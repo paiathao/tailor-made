@@ -15,17 +15,17 @@ class ServiceTotal extends Component {
         let tax = 0;
         let totalCost = 0;
 
-        array.forEach(function(value){
+        array.forEach(function (value) {
             sum += value.cost;
-            tax = (sum * 0.06) 
+            tax = (sum * 0.06)
             totalCost = (sum + tax)
-           });
+        });
 
         return (
             <div>
-                Subtotal Cost: {sum.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-                Taxes: {tax.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-                Total Cost: {totalCost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                <p> Subtotal Cost: {sum.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} </p>
+                <p> Taxes: {tax.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} </p>
+                <p> Total Cost: {totalCost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} </p>
             </div>
         );
     }

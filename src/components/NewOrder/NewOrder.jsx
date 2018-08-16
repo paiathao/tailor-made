@@ -129,8 +129,8 @@ class NewOrder extends Component {
             onChange={this.handleChangeFor('phone')}
           />
           <input type="number" placeholder="Order #"
-            value={this.state.newCustomer.order}
-            onChange={this.handleChangeFor('order')}
+            value={this.state.newCustomer.orderNumber}
+            onChange={this.handleChangeFor('orderNumber')}
           />
           <DatePicker
             selected={this.state.newCustomer.dropDate}
