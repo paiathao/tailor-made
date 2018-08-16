@@ -110,7 +110,7 @@ class ServiceSelector extends React.Component {
                         {n.category}
                       </TableCell>
                       <TableCell numeric>{n.service}</TableCell>
-                      <TableCell numeric>{n.cost}</TableCell>
+                      <TableCell numeric>{n.cost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</TableCell>
                     </TableRow>
                   );
                 })}

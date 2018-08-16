@@ -12,14 +12,20 @@ class ServiceTotal extends Component {
         let array = this.props.services
 
         let sum = 0;
+        let tax = 0;
+        let totalCost = 0;
 
-        array.forEach(function(value, index, arry){
+        array.forEach(function(value){
             sum += value.cost;
+            tax = (sum * 0.06) 
+            totalCost = (sum + tax)
            });
 
         return (
             <div>
-                Total Cost: {sum}
+                Subtotal Cost: {sum.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                Taxes: {tax.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                Total Cost: {totalCost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
             </div>
         );
     }

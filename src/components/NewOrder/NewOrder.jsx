@@ -6,6 +6,7 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
+import Checkbox from '@material-ui/core/Checkbox';
 
 //import others components
 import Nav from '../../components/Nav/Nav';
@@ -15,7 +16,7 @@ import ServiceTotal from '../ServiceTotal/ServiceTotal'
 
 const mapStateToProps = state => ({
   user: state.user,
-  services : state.newService
+  services: state.newService
 });
 
 class NewOrder extends Component {
@@ -51,7 +52,7 @@ class NewOrder extends Component {
 
   saveServices = () => {
     this.setState({
-      newCustomer : {
+      newCustomer: {
         ...this.state.newCustomer,
         orderDetails: this.props.services
       }
@@ -89,10 +90,28 @@ class NewOrder extends Component {
     }
   }
 
+  updatePayment = () => {
+
+    if (this.state.newCustomer.paid === false) {
+      this.setState({
+        newCustomer: {
+          ...this.state.newCustomer,
+          paid: true
+        }
+      })
+    } else {
+      this.setState({
+        newCustomer: {
+          ...this.state.newCustomer,
+          paid: false
+        }
+      })
+    }
+
+  }
+
   render() {
     let content = null;
-
-    // console.log('newCustomer', this.state.newCustomer)
 
     if (this.props.user.userName) {
       content = (
@@ -126,8 +145,15 @@ class NewOrder extends Component {
             maxTime={moment().hours(20).minutes(0)}
             dateFormat="LLL" />
           <ServiceSelector />
-          <ServiceList/>
-          <ServiceTotal/>
+          <ServiceList />
+          <ServiceTotal />
+          <label>Payent Receive</label>
+          <Checkbox
+            onChange={this.updatePayment}
+          />
+          <button>
+            Submit
+          </button>
         </div>
       );
     }
