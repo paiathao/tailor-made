@@ -78,6 +78,8 @@ class NewOrder extends Component {
   render() {
     let content = null;
 
+    // console.log('newCustomer', this.state.newCustomer)
+
     if (this.props.user.userName) {
       content = (
         <div>
@@ -109,7 +111,7 @@ class NewOrder extends Component {
               minTime={moment().hours(10).minutes(0)}
               maxTime={moment().hours(20).minutes(0)}
               dateFormat="LLL" />
-            <ServiceSelector/>
+            <ServiceSelector orderDetails={this.state.newCustomer.orderDetails}/>
         </div>
       );
     }

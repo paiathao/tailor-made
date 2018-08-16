@@ -1,149 +1,16 @@
 import React from 'react';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import AddIcon from '@material-ui/icons/Add';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import { lighten } from '@material-ui/core/styles/colorManipulator';
 import { connect } from 'react-redux';
 
-const rows = [
-  { id: 'category', disablePadding: false, label: 'Category' },
-  { id: 'services', disablePadding: false, label: 'Services' },
-  { id: 'cost', disablePadding: false, label: 'Cost' },
-
-];
-
-this.addServices = (selected) => {
-  console.log('click', selected)
-}
-
-class EnhancedTableHead extends React.Component {
-  // createSortHandler = property => event => {
-  //   this.props.onRequestSort(event, property);
-  // };
-
-  render() {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
-
-    return (
-      <TableHead>
-        <TableRow>
-          <TableCell padding="checkbox">
-            <Checkbox
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={numSelected === rowCount}
-              onChange={onSelectAllClick}
-            />
-          </TableCell>
-          {rows.map(row => {
-            return (
-              <TableCell
-                key={row.id}
-                numeric={row.numeric}
-                padding={row.disablePadding ? 'none' : 'default'}
-              >
-                <Tooltip
-                  title="Sort"
-                  placement={row.numeric ? 'bottom-end' : 'bottom-start'}
-                  enterDelay={300}
-                >
-                  <TableSortLabel
-                    active={orderBy === row.id}
-                    direction={order}
-                    // onClick={this.createSortHandler(row.id)}
-                  >
-                    {row.label}
-                  </TableSortLabel>
-                </Tooltip>
-              </TableCell>
-            );
-          }, this)}
-        </TableRow>
-      </TableHead>
-    );
-  }
-}
-
-
-const toolbarStyles = theme => ({
-  root: {
-    paddingRight: theme.spacing.unit,
-  },
-  highlight:
-    theme.palette.type === 'light'
-      ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-      : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
-  spacer: {
-    flex: '1 1 100%',
-  },
-  actions: {
-    color: theme.palette.text.secondary,
-  },
-  title: {
-    flex: '0 0 auto',
-  },
-});
-
-let EnhancedTableToolbar = props => {
-  const { numSelected, classes, selected } = props;
-
-  return (
-    <Toolbar
-      className={classNames(classes.root, {
-        [classes.highlight]: numSelected > 0,
-      })}
-    >
-      <div className={classes.title}>
-        {numSelected > 0 ? (
-          <Typography color="inherit" variant="subheading">
-            {numSelected} selected
-          </Typography>
-        ) : (
-          <Typography variant="title" id="tableTitle">
-            Services
-          </Typography>
-        )}
-      </div>
-      <div className={classes.spacer} />
-      <div className={classes.actions}>
-        {numSelected > 0 ? (
-          <Tooltip title="Add">
-            <IconButton aria-label="Add">
-              <AddIcon onClick={()=>this.addServices(selected)}/>
-            </IconButton>
-          </Tooltip>
-        ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="Filter list">
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
-        )}
-      </div>
-    </Toolbar>
-  );
-};
-
-EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
+import EnhancedTableHead from '../EnhancedTableHead/EnhancedTableHead'
+import EnhancedTableToolbar from '../EnhancedTableToolbar/EnhancedTableToolbar'
 
 const styles = theme => ({
   root: {
@@ -159,41 +26,28 @@ const styles = theme => ({
 });
 
 class ServiceSelector extends React.Component {
-  
+
   state = {
-    order: 'asc',
-    orderBy: 'category',
     selected: [],
     page: 0,
     rowsPerPage: 10,
   };
 
-  handleRequestSort = (event, property) => {
-    const orderBy = property;
-    let order = 'desc';
-
-    if (this.state.orderBy === property && this.state.order === 'desc') {
-      order = 'asc';
-    }
-
-    this.setState({ order, orderBy });
-  };
-
   handleSelectAllClick = (event, checked) => {
     if (checked) {
-      this.setState(state => ({ selected: this.props.serviceList.map(n => n._id) }));
+      this.setState(state => ({ selected: this.props.serviceList.map(n => n) }));
       return;
     }
     this.setState({ selected: [] });
   };
 
-  handleClick = (event, id) => {
+  handleClick = (event, row) => {
     const { selected } = this.state;
-    const selectedIndex = selected.indexOf(id);
+    const selectedIndex = selected.indexOf(row);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
+      newSelected = newSelected.concat(selected, row);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -216,38 +70,33 @@ class ServiceSelector extends React.Component {
     this.setState({ rowsPerPage: event.target.value });
   };
 
-  isSelected = id => this.state.selected.indexOf(id) !== -1;
+  isSelected = row => this.state.selected.indexOf(row) !== -1;
 
   render() {
     const { classes } = this.props;
-    const { /*order, orderBy,*/ selected, rowsPerPage, page } = this.state;
+    const { selected, rowsPerPage, page } = this.state;
     const data = this.props.serviceList
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
-    console.log('selected', selected)
     return (
       <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} selected={this.state.selected}/>
+        <EnhancedTableToolbar numSelected={selected.length} selected={this.state.selected} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
               numSelected={selected.length}
-              // order={order}
-              // orderBy={orderBy}
               onSelectAllClick={this.handleSelectAllClick}
-              onRequestSort={this.handleRequestSort}
               rowCount={data.length}
             />
             <TableBody>
               {data
-                // .sort(getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((n, index) => {
-                  const isSelected = this.isSelected(n._id);
+                  const isSelected = this.isSelected(n);
                   return (
                     <TableRow
                       hover
-                      onClick={event => this.handleClick(event, n._id)}
+                      onClick={event => this.handleClick(event, n)}
                       role="checkbox"
                       aria-checked={isSelected}
                       tabIndex={-1}
@@ -291,8 +140,6 @@ class ServiceSelector extends React.Component {
     );
   }
 }
-
-
 
 const mapStateToProps = (state) => {
   return { serviceList: state.serviceList }

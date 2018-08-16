@@ -6,6 +6,7 @@ import axios from 'axios';
 
 export default function* rootSaga() {
   yield takeEvery('FETCH_SERVICES', fetchServices)
+  yield takeEvery('ADD_SERVICES', addServices)
   yield all([
     userSaga(),
     loginSaga(),
@@ -13,17 +14,21 @@ export default function* rootSaga() {
   ]);
 }
 
-function* fetchServices() {
-    try {
-      console.log('fetch Services');
-  
-      const servicesList = yield call(axios.get, '/api/service')
-      yield dispatch({
-        type: 'GET_SERVICES',
-        payload: servicesList.data
-      })
+function* addServices(action) {
+  yield dispatch({
+    type: 'NEW_SERVICES',
+    payload: action.payload
+  })
+}
 
-    } catch (err) {
-      yield console.log(err);
-    }
+function* fetchServices() {
+  try {
+    const servicesList = yield call(axios.get, '/api/service')
+    yield dispatch({
+      type: 'GET_SERVICES',
+      payload: servicesList.data
+    })
+  } catch (err) {
+    yield console.log(err);
+  }
 } 
