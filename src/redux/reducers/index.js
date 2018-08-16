@@ -11,10 +11,20 @@ const serviceList = (state = [], action) =>{
   }
 }
 
+const newService = (state = [], action) =>{
+  switch(action.type){
+    case 'ADD_SERVICES':
+      return action.payload
+    default:
+      return state;
+  }
+}
+
 const store = combineReducers({
   user,
   login,
   serviceList,
+  newService
 });
 
 export default store;

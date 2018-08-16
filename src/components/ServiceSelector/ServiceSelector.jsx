@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -15,14 +14,10 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import { connect } from 'react-redux';
-
-function getSorting(order, orderBy) {
-  return order === 'desc' ? (a, b) => b[orderBy] - a[orderBy] : (a, b) => a[orderBy] - b[orderBy];
-}
 
 const rows = [
   { id: 'category', disablePadding: false, label: 'Category' },
@@ -31,10 +26,14 @@ const rows = [
 
 ];
 
+this.addServices = (selected) => {
+  console.log('click', selected)
+}
+
 class EnhancedTableHead extends React.Component {
-  createSortHandler = property => event => {
-    this.props.onRequestSort(event, property);
-  };
+  // createSortHandler = property => event => {
+  //   this.props.onRequestSort(event, property);
+  // };
 
   render() {
     const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
@@ -55,7 +54,6 @@ class EnhancedTableHead extends React.Component {
                 key={row.id}
                 numeric={row.numeric}
                 padding={row.disablePadding ? 'none' : 'default'}
-                sortDirection={orderBy === row.id ? order : false}
               >
                 <Tooltip
                   title="Sort"
@@ -65,7 +63,7 @@ class EnhancedTableHead extends React.Component {
                   <TableSortLabel
                     active={orderBy === row.id}
                     direction={order}
-                    onClick={this.createSortHandler(row.id)}
+                    // onClick={this.createSortHandler(row.id)}
                   >
                     {row.label}
                   </TableSortLabel>
@@ -106,7 +104,7 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes } = props;
+  const { numSelected, classes, selected } = props;
 
   return (
     <Toolbar
@@ -128,9 +126,9 @@ let EnhancedTableToolbar = props => {
       <div className={classes.spacer} />
       <div className={classes.actions}>
         {numSelected > 0 ? (
-          <Tooltip title="Delete">
-            <IconButton aria-label="Delete">
-              <DeleteIcon />
+          <Tooltip title="Add">
+            <IconButton aria-label="Add">
+              <AddIcon onClick={()=>this.addServices(selected)}/>
             </IconButton>
           </Tooltip>
         ) : (
@@ -222,20 +220,20 @@ class ServiceSelector extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { order, orderBy, selected, rowsPerPage, page } = this.state;
+    const { /*order, orderBy,*/ selected, rowsPerPage, page } = this.state;
     const data = this.props.serviceList
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
-
+    console.log('selected', selected)
     return (
       <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length} selected={this.state.selected}/>
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
               numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
+              // order={order}
+              // orderBy={orderBy}
               onSelectAllClick={this.handleSelectAllClick}
               onRequestSort={this.handleRequestSort}
               rowCount={data.length}
