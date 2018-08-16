@@ -11,7 +11,7 @@ const serviceList = (state = [], action) =>{
   }
 }
 
-const newService = (state = [], action) =>{
+const addService = (state = [], action) =>{
   switch(action.type){
     case 'ADD_SERVICES':
       return action.payload
@@ -24,7 +24,7 @@ const store = combineReducers({
   user,
   login,
   serviceList,
-  newService
+  addService
 });
 
 export default store;

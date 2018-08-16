@@ -26,10 +26,6 @@ const rows = [
 
 ];
 
-this.addServices = (selected) => {
-  console.log('click', selected)
-}
-
 class EnhancedTableHead extends React.Component {
   // createSortHandler = property => event => {
   //   this.props.onRequestSort(event, property);
@@ -56,14 +52,15 @@ class EnhancedTableHead extends React.Component {
                 padding={row.disablePadding ? 'none' : 'default'}
               >
                 <Tooltip
-                  title="Sort"
+                  // title="Sort"
+                  title={row.id}
                   placement={row.numeric ? 'bottom-end' : 'bottom-start'}
                   enterDelay={300}
                 >
                   <TableSortLabel
-                    active={orderBy === row.id}
-                    direction={order}
-                    // onClick={this.createSortHandler(row.id)}
+                  // active={orderBy === row.id}
+                  // direction={order}
+                  // onClick={this.createSortHandler(row.id)}
                   >
                     {row.label}
                   </TableSortLabel>
@@ -85,13 +82,13 @@ const toolbarStyles = theme => ({
   highlight:
     theme.palette.type === 'light'
       ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
+        color: theme.palette.secondary.main,
+        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+      }
       : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.secondary.dark,
+      },
   spacer: {
     flex: '1 1 100%',
   },
@@ -103,8 +100,26 @@ const toolbarStyles = theme => ({
   },
 });
 
-let EnhancedTableToolbar = props => {
-  const { numSelected, classes, selected } = props;
+class EnhancedTableToolbar extends React.Component {
+
+  constructor(props) {
+    super(props)
+    
+    this.state = {
+      service : [],
+    }
+  }
+  
+
+addServices = (selected) => {
+  console.log('click', selected)
+  this.setState({
+    service: selected 
+  })
+}
+
+render() {
+  const { numSelected, classes, selected } = this.props;
 
   return (
     <Toolbar
@@ -118,29 +133,31 @@ let EnhancedTableToolbar = props => {
             {numSelected} selected
           </Typography>
         ) : (
-          <Typography variant="title" id="tableTitle">
-            Services
+            <Typography variant="title" id="tableTitle">
+              Services
           </Typography>
-        )}
+          )}
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
         {numSelected > 0 ? (
           <Tooltip title="Add">
             <IconButton aria-label="Add">
-              <AddIcon onClick={()=>this.addServices(selected)}/>
+              <AddIcon onClick={() => this.addServices(selected)} />
             </IconButton>
           </Tooltip>
         ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="Filter list">
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
-        )}
+            <Tooltip title="Filter list">
+              <IconButton aria-label="Filter list">
+                <FilterListIcon />
+              </IconButton>
+            </Tooltip>
+          )}
       </div>
     </Toolbar>
   );
+  }
+  
 };
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
@@ -159,7 +176,7 @@ const styles = theme => ({
 });
 
 class ServiceSelector extends React.Component {
-  
+
   state = {
     order: 'asc',
     orderBy: 'category',
@@ -187,13 +204,13 @@ class ServiceSelector extends React.Component {
     this.setState({ selected: [] });
   };
 
-  handleClick = (event, id) => {
+  handleClick = (event, row) => {
     const { selected } = this.state;
-    const selectedIndex = selected.indexOf(id);
+    const selectedIndex = selected.indexOf(row);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
+      newSelected = newSelected.concat(selected, row);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -216,7 +233,7 @@ class ServiceSelector extends React.Component {
     this.setState({ rowsPerPage: event.target.value });
   };
 
-  isSelected = id => this.state.selected.indexOf(id) !== -1;
+  isSelected = row => this.state.selected.indexOf(row) !== -1;
 
   render() {
     const { classes } = this.props;
@@ -224,10 +241,9 @@ class ServiceSelector extends React.Component {
     const data = this.props.serviceList
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
-    console.log('selected', selected)
     return (
       <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} selected={this.state.selected}/>
+        <EnhancedTableToolbar numSelected={selected.length} selected={this.state.selected} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
@@ -235,7 +251,7 @@ class ServiceSelector extends React.Component {
               // order={order}
               // orderBy={orderBy}
               onSelectAllClick={this.handleSelectAllClick}
-              onRequestSort={this.handleRequestSort}
+              // onRequestSort={this.handleRequestSort}
               rowCount={data.length}
             />
             <TableBody>
@@ -243,11 +259,11 @@ class ServiceSelector extends React.Component {
                 // .sort(getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((n, index) => {
-                  const isSelected = this.isSelected(n._id);
+                  const isSelected = this.isSelected(n);
                   return (
                     <TableRow
                       hover
-                      onClick={event => this.handleClick(event, n._id)}
+                      onClick={event => this.handleClick(event, n)}
                       role="checkbox"
                       aria-checked={isSelected}
                       tabIndex={-1}
