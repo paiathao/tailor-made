@@ -27,9 +27,7 @@ class Success extends Component {
     if (this.props.user.userName) {
       content = (
         <div>
-          <p>
-          Confirmation
-          </p>
+          <h1>New Orders Added</h1>
         </div>
       );
     }

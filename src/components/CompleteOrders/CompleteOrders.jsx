@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
+import CompleteTable from '../CompleteTable/CompleteTable';
+
 const mapStateToProps = state => ({
   user: state.user,
 });
@@ -25,9 +27,7 @@ class CompleteOrders extends Component {
     if (this.props.user.userName) {
       content = (
         <div>
-          <p>
-          Complete Orders
-          </p>
+         <CompleteTable/>
         </div>
       );
     }

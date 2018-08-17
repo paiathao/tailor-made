@@ -4,13 +4,16 @@ import { connect } from 'react-redux';
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
+import CurrentTable from '../CurrentTable/CurrentTable'
+
 const mapStateToProps = state => ({
   user: state.user,
 });
 
+
 class CurrentOrders extends Component {
   componentDidMount() {
-    this.props.dispatch({type: USER_ACTIONS.FETCH_USER}); 
+    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
 
   componentDidUpdate() {
@@ -21,13 +24,12 @@ class CurrentOrders extends Component {
 
   render() {
     let content = null;
+    
 
     if (this.props.user.userName) {
       content = (
         <div>
-          <p>
-            Current Order
-          </p>
+         <CurrentTable/>
         </div>
       );
     }
@@ -35,11 +37,13 @@ class CurrentOrders extends Component {
     return (
       <div>
         <Nav />
-        { content }
+        {content}
       </div>
     );
   }
 }
+
+
 
 // this allows us to use <App /> in index.js
 export default connect(mapStateToProps)(CurrentOrders);

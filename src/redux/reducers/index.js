@@ -11,6 +11,15 @@ const serviceList = (state = [], action) => {
   }
 }
 
+const customerList = (state = [], action) => {
+  switch (action.type) {
+    case 'GET_CUSTOMER':
+      return action.payload
+    default:
+      return state;
+  }
+}
+
 const defaultState = {
   firstName: '',
   lastName: '',
@@ -32,7 +41,6 @@ const newCustomer = (state = defaultState, action) => {
         orderDetails: action.payload
       }
     case 'ADD_CUSTOMER':
-      console.log('add customer', action.payload)
       return {
         ...state,
         firstName: action.payload.firstName,
@@ -57,7 +65,8 @@ const store = combineReducers({
   user,
   login,
   serviceList,
-  newCustomer
+  newCustomer,
+  customerList
 });
 
 export default store;
