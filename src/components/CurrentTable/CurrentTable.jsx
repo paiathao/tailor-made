@@ -9,86 +9,105 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Checkbox from '@material-ui/core/Checkbox';
 
 //styles
 const CustomTableCell = withStyles(theme => ({
-    head: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+  },
+  table: {
+    minWidth: 700,
+  },
+  row: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
     },
-    body: {
-      fontSize: 14,
-    },
-  }))(TableCell);
-  
-  const styles = theme => ({
-    root: {
-      width: '100%',
-      marginTop: theme.spacing.unit * 3,
-      overflowX: 'auto',
-    },
-    table: {
-      minWidth: 700,
-    },
-    row: {
-      '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.background.default,
-      },
-    },
-  });
+  },
+});
 
 const mapStateToProps = state => ({
-    customerList: state.customerList
+  customerList: state.customerList
 });
 
 class currentTable extends Component {
 
-    componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_CUSTOMERS' });
-    }
+  constructor(props) {
+    super(props)
 
-    render() {
-        const { classes } = this.props;
-
-        return (
-            <Paper className={classes.root}>
-            <Table className={classes.table}>
-              <TableHead>
-                <TableRow>
-                  <CustomTableCell>Order #</CustomTableCell>
-                  <CustomTableCell>Customer's Name</CustomTableCell>
-                  <CustomTableCell>Phone</CustomTableCell>
-                  <CustomTableCell>Order's Detail</CustomTableCell>
-                  <CustomTableCell>Due Date</CustomTableCell>
-                  <CustomTableCell>Paid</CustomTableCell>
-                  <CustomTableCell>Complete</CustomTableCell>
-                  <CustomTableCell>Edit</CustomTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {this.props.customerList.map((customer, index) => {
-                    if (customer.complete == false) {
-                  return (
-                    <TableRow className={classes.row} key={index}>
-                      <CustomTableCell component="th" scope="row">
-                        {customer.orderNumber}
-                      </CustomTableCell>
-                      <CustomTableCell numeric>{customer.firstName} {customer.lastName}</CustomTableCell>
-                      <CustomTableCell numeric>{customer.phone}</CustomTableCell>
-                      <CustomTableCell numeric><button>Show Orders Details</button></CustomTableCell>
-                      <CustomTableCell numeric>{(new Date(customer.pickUp)).toLocaleDateString()}</CustomTableCell>
-                      <CustomTableCell numeric>{customer.paid.toString()}</CustomTableCell>
-                      <CustomTableCell numeric>{customer.complete.toString()}</CustomTableCell>
-                      <CustomTableCell numeric><button>Edit</button></CustomTableCell>
-                    </TableRow>
-                  );
-                }
-                })}
-              </TableBody>
-            </Table>
-          </Paper>
-        );
+    this.state = {
+      id: [],
+      editItem: [],
     }
+  }
+
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_CUSTOMERS' });
+  }
+
+  handleComplete = (id) => {
+    console.log('handle complete', id)
+    this.props.dispatch({ type: 'UPDATE_STATUS', payload: id });
+  }
+
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <Paper className={classes.root}>
+        <Table className={classes.table}>
+          <TableHead>
+            <TableRow>
+              <CustomTableCell>Order #</CustomTableCell>
+              <CustomTableCell>Customer's Name</CustomTableCell>
+              <CustomTableCell>Phone</CustomTableCell>
+              <CustomTableCell>Order's Detail</CustomTableCell>
+              <CustomTableCell>Due Date</CustomTableCell>
+              <CustomTableCell>Paid</CustomTableCell>
+              <CustomTableCell>Complete</CustomTableCell>
+              <CustomTableCell>Edit</CustomTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {this.props.customerList.map((customer, index) => {
+              if (customer.complete === false) {
+                return (
+                  <TableRow className={classes.row} key={index}>
+                    <CustomTableCell component="th" scope="row">
+                      {customer.orderNumber}
+                    </CustomTableCell>
+                    <CustomTableCell numeric>{customer.firstName} {customer.lastName}</CustomTableCell>
+                    <CustomTableCell numeric>{customer.phone}</CustomTableCell>
+                    <CustomTableCell numeric><button>Show Details</button></CustomTableCell>
+                    <CustomTableCell numeric>{(new Date(customer.pickUp)).toLocaleDateString()}</CustomTableCell>
+                    <CustomTableCell numeric>{customer.paid.toString()}</CustomTableCell>
+                    <CustomTableCell numeric>
+                      <Checkbox
+                        onClick={() => this.handleComplete(customer._id)}
+                      />
+                    </CustomTableCell>
+                    <CustomTableCell numeric><button>Edit</button></CustomTableCell>
+                  </TableRow>
+                );
+              }
+            })}
+          </TableBody>
+        </Table>
+      </Paper>
+    );
+  }
 }
 
 const styleCurrentTable = withStyles(styles)(currentTable)

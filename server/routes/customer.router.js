@@ -27,4 +27,20 @@ router.post('/', (req, res) => {
     })
 });
 
+//put request to update order status to complete
+router.put('/:id', function(req,res){
+  console.log('Got to PUT');
+  // update Database
+  Customer.findByIdAndUpdate({
+    _id : req.params.id
+  }, {
+    $set : {complete : true} 
+  }).then(function(response){
+    res.sendStatus(200);
+  }).catch( (err) => {
+    console.log(err);
+    res.sendStatus(500)
+  })
+})
+
 module.exports = router;
