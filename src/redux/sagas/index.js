@@ -6,12 +6,12 @@ import axios from 'axios';
 
 export default function* rootSaga() {
   yield takeEvery('FETCH_SERVICES', fetchServices)
+  yield takeEvery('FETCH_CUSTOMERS', fetchCustomers)
   yield takeEvery('ADD_SERVICES', addServices)
   yield takeEvery('POST_CUSTOMER', postCustomer)
   yield all([
     userSaga(),
     loginSaga(),
-    // watchIncrementAsync()
   ]);
 }
 
@@ -34,9 +34,20 @@ function* fetchServices() {
   }
 } 
 
+function* fetchCustomers() {
+  try {
+    const customerList = yield call(axios.get, '/api/customer')
+    yield dispatch({
+      type: 'GET_CUSTOMER',
+      payload: customerList.data
+    })
+  } catch (err) {
+    yield console.log(err);
+  }
+} 
+
 function* postCustomer(action) {
   try{
-    console.log('in post saga', action.payload);
     yield call(axios.post, '/api/customer', action.payload)
 
   } catch (error) {

@@ -3,9 +3,6 @@ const router = express.Router();
 
 const Service = require('../models/Service');
 
-/**
- * GET route template
- */
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
         console.log('got to service GET');
@@ -18,15 +15,6 @@ router.get('/', (req, res) => {
     } else {
         res.sendStatus(403)
     }
-});
-
-
-
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-
 });
 
 module.exports = router;

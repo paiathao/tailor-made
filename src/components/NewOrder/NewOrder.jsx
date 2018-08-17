@@ -47,7 +47,6 @@ class NewOrder extends Component {
   }
 
   handleChangeForDropOff = (date) => {
-    console.log('date', date)
     this.setState({
       newCustomer: {
         ...this.state.newCustomer,
@@ -57,7 +56,6 @@ class NewOrder extends Component {
   }
 
   handleChangeForPickUp = (date) => {
-    console.log('date', date)
     this.setState({
       newCustomer: {
         ...this.state.newCustomer,

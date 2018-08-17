@@ -38,7 +38,6 @@ const toolbarStyles = theme => ({
 class EnhancedTableToolbar extends React.Component {
 
     addServices = (selected) => {
-        console.log('click', selected)
         this.props.dispatch({
             type: 'ADD_SERVICES',
             payload: selected,
