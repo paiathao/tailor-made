@@ -16,7 +16,6 @@ import ServiceTotal from '../ServiceTotal/ServiceTotal'
 
 const mapStateToProps = state => ({
   user: state.user,
-  services: state.newService
 });
 
 class NewOrder extends Component {
@@ -28,8 +27,6 @@ class NewOrder extends Component {
         lastName: '',
         phone: '',
         orderNumber: '',
-        orderDetails: [],
-        totalCost: '',
         dropDate: moment(),
         pickUp: moment(),
         paid: false,
@@ -41,22 +38,12 @@ class NewOrder extends Component {
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
     this.props.dispatch({ type: 'FETCH_SERVICES' });
-    this.saveServices();
   }
 
   componentDidUpdate() {
     if (!this.props.user.isLoading && this.props.user.userName === null) {
       this.props.history.push('home');
     }
-  }
-
-  saveServices = () => {
-    this.setState({
-      newCustomer: {
-        ...this.state.newCustomer,
-        orderDetails: this.props.services
-      }
-    })
   }
 
   handleChangeForDropOff = (date) => {
@@ -110,6 +97,15 @@ class NewOrder extends Component {
 
   }
 
+  handleSubmit = () => {
+    console.log(this.state.newCustomer)
+    this.props.dispatch({
+      type: 'ADD_CUSTOMER',
+      payload: this.state.newCustomer
+    })
+    this.props.history.push('/dashboard')
+  }
+
   render() {
     let content = null;
 
@@ -129,8 +125,8 @@ class NewOrder extends Component {
             onChange={this.handleChangeFor('phone')}
           />
           <input type="number" placeholder="Order #"
-            value={this.state.newCustomer.order}
-            onChange={this.handleChangeFor('order')}
+            value={this.state.newCustomer.orderNumber}
+            onChange={this.handleChangeFor('orderNumber')}
           />
           <DatePicker
             selected={this.state.newCustomer.dropDate}
@@ -151,7 +147,7 @@ class NewOrder extends Component {
           <Checkbox
             onChange={this.updatePayment}
           />
-          <button>
+          <button onClick={this.handleSubmit}>
             Submit
           </button>
         </div>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
-    services: state.newService
+    services: state.newCustomer.orderDetails
 });
 
 class ServiceList extends Component {

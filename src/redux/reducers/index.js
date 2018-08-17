@@ -11,18 +11,53 @@ const serviceList = (state = [], action) => {
   }
 }
 
-const newService = (state = [], action) => {
-  if (action.type === 'NEW_SERVICES') {
-    return action.payload
+const defaultState = {
+  firstName: '',
+  lastName: '',
+  phone: '',
+  orderNumber: '',
+  orderDetails: [],
+  totalCost: '',
+  dropDate: '',
+  pickUp: '',
+  paid: false,
+  complete: false
+}
+
+const newCustomer = (state = defaultState, action) => {
+  switch (action.type) {
+    case 'NEW_SERVICES':
+      return {
+        ...state,
+        orderDetails: action.payload
+      }
+    case 'ADD_CUSTOMER':
+      console.log('add customer', action.payload)
+      return {
+        ...state,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        phone: action.payload.phone,
+        orderNumber: action.payload.orderNumber,
+        dropDate: action.payload.dropDate,
+        pickUp: action.payload.pickUp,
+        paid: action.payload.paid,
+      }
+      case 'ADD_TOTALCOST':
+      return {
+        ...state,
+        totalCost: action.payload
+      }
+    default:
+      return state;
   }
-  return state
 }
 
 const store = combineReducers({
   user,
   login,
   serviceList,
-  newService
+  newCustomer
 });
 
 export default store;
