@@ -26,6 +26,8 @@ class DashBoard extends Component {
   render() {
     let content = null;
 
+    console.log('user', this.props.user)
+
     if (this.props.user.userName) {
       content = (
         <div>

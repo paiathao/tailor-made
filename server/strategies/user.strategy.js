@@ -20,6 +20,7 @@ passport.deserializeUser((id, done) => {
       const userInfo = {
         username: user.username,
         _id: user._id,
+        role: user.role
       };
       
       console.log('user info: ', userInfo);
