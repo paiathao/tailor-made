@@ -41,7 +41,7 @@ const mapStateToProps = state => ({
     customerList: state.customerList
 });
 
-class costumerTable extends Component {
+class CompleteTable extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_CUSTOMERS' });
@@ -67,7 +67,7 @@ class costumerTable extends Component {
               </TableHead>
               <TableBody>
                 {this.props.customerList.map((customer, index) => {
-                    if (customer.complete == false) {
+                    if (customer.complete == true) {
                   return (
                     <TableRow className={classes.row} key={index}>
                       <CustomTableCell component="th" scope="row">
@@ -91,7 +91,7 @@ class costumerTable extends Component {
     }
 }
 
-const styleCostumerTable = withStyles(styles)(costumerTable)
+const styleCompleteTable = withStyles(styles)(CompleteTable)
 
-export default connect(mapStateToProps)(styleCostumerTable);
+export default connect(mapStateToProps)(styleCompleteTable);
 
