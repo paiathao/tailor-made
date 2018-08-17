@@ -7,6 +7,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import Checkbox from '@material-ui/core/Checkbox';
+import NumberFormat from 'react-number-format';
 
 //import others components
 import Nav from '../../components/Nav/Nav';
@@ -118,10 +119,12 @@ class NewOrder extends Component {
             value={this.state.newCustomer.lastName}
             onChange={this.handleChangeFor('lastName')}
           />
-          <input type="number" placeholder="Phone"
-            value={this.state.newCustomer.phone}
-            onChange={this.handleChangeFor('phone')}
-          />
+          <NumberFormat 
+          placeholder="Phone"
+          value={this.state.newCustomer.phone}
+          onChange={this.handleChangeFor('phone')}
+          format="(###) ###-####" 
+          mask="_"/>
           <input type="number" placeholder="Order #"
             value={this.state.newCustomer.orderNumber}
             onChange={this.handleChangeFor('orderNumber')}

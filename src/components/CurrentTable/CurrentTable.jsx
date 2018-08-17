@@ -75,7 +75,8 @@ class currentTable extends Component {
               <CustomTableCell>Phone</CustomTableCell>
               <CustomTableCell>Order's Detail</CustomTableCell>
               <CustomTableCell>Due Date</CustomTableCell>
-              <CustomTableCell>Paid</CustomTableCell>
+              <CustomTableCell>Total Cost</CustomTableCell>
+              <CustomTableCell>Payment Receive</CustomTableCell>
               <CustomTableCell>Complete</CustomTableCell>
               <CustomTableCell>Edit</CustomTableCell>
             </TableRow>
@@ -88,12 +89,13 @@ class currentTable extends Component {
                     <CustomTableCell component="th" scope="row">
                       {customer.orderNumber}
                     </CustomTableCell>
-                    <CustomTableCell numeric>{customer.firstName} {customer.lastName}</CustomTableCell>
-                    <CustomTableCell numeric>{customer.phone}</CustomTableCell>
-                    <CustomTableCell numeric><button>Show Details</button></CustomTableCell>
-                    <CustomTableCell numeric>{(new Date(customer.pickUp)).toLocaleDateString()}</CustomTableCell>
-                    <CustomTableCell numeric>{customer.paid.toString()}</CustomTableCell>
-                    <CustomTableCell numeric>
+                    <CustomTableCell>{customer.firstName} {customer.lastName}</CustomTableCell>
+                    <CustomTableCell>{customer.phone}</CustomTableCell>
+                    <CustomTableCell><button>Show Details</button></CustomTableCell>
+                    <CustomTableCell>{(new Date(customer.pickUp)).toLocaleDateString()}</CustomTableCell>
+                    <CustomTableCell >${customer.totalCost}</CustomTableCell>
+                    <CustomTableCell>{customer.paid.toString()}</CustomTableCell>
+                    <CustomTableCell>
                       <Checkbox
                         onClick={() => this.handleComplete(customer._id)}
                       />

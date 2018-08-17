@@ -58,10 +58,8 @@ class CompleteTable extends Component {
                   <CustomTableCell>Order #</CustomTableCell>
                   <CustomTableCell>Customer's Name</CustomTableCell>
                   <CustomTableCell>Phone</CustomTableCell>
-                  <CustomTableCell>Order's Detail</CustomTableCell>
-                  <CustomTableCell>Due Date</CustomTableCell>
-                  <CustomTableCell>Paid</CustomTableCell>
-                  <CustomTableCell>Complete</CustomTableCell>
+                  <CustomTableCell>Total</CustomTableCell>
+                  <CustomTableCell>Complete Date</CustomTableCell>
                   <CustomTableCell>Edit</CustomTableCell>
                 </TableRow>
               </TableHead>
@@ -73,13 +71,11 @@ class CompleteTable extends Component {
                       <CustomTableCell component="th" scope="row">
                         {customer.orderNumber}
                       </CustomTableCell>
-                      <CustomTableCell numeric>{customer.firstName} {customer.lastName}</CustomTableCell>
-                      <CustomTableCell numeric>{customer.phone}</CustomTableCell>
-                      <CustomTableCell numeric><button>Show Orders Details</button></CustomTableCell>
-                      <CustomTableCell numeric>{(new Date(customer.pickUp)).toLocaleDateString()}</CustomTableCell>
-                      <CustomTableCell numeric>{customer.paid.toString()}</CustomTableCell>
-                      <CustomTableCell numeric>{customer.complete.toString()}</CustomTableCell>
-                      <CustomTableCell numeric><button>Edit</button></CustomTableCell>
+                      <CustomTableCell>{customer.firstName} {customer.lastName}</CustomTableCell>
+                      <CustomTableCell>{customer.phone}</CustomTableCell>
+                      <CustomTableCell>${customer.totalCost}</CustomTableCell>
+                      <CustomTableCell>{(new Date(customer.pickUp)).toLocaleDateString()}</CustomTableCell>
+                      <CustomTableCell><button>Edit</button></CustomTableCell>
                     </TableRow>
                   );
                 }
