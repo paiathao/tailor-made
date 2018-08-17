@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
+import CustomerTable from '../CustomerTable/CustomerTable'
+
 const mapStateToProps = state => ({
   user: state.user,
 });
@@ -25,9 +27,7 @@ class CustomersBoard extends Component {
     if (this.props.user.userName) {
       content = (
         <div>
-          <p>
-          Customers Board
-          </p>
+          <CustomerTable/>
         </div>
       );
     }

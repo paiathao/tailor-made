@@ -9,7 +9,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
 
 //styles
 const CustomTableCell = withStyles(theme => ({
@@ -42,7 +41,7 @@ const mapStateToProps = state => ({
   customerList: state.customerList
 });
 
-class currentTable extends Component {
+class CustomerTable extends Component {
 
   constructor(props) {
     super(props)
@@ -70,42 +69,24 @@ class currentTable extends Component {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <CustomTableCell>Order #</CustomTableCell>
-              <CustomTableCell>Customer's Name</CustomTableCell>
+              <CustomTableCell>First Name</CustomTableCell>
+              <CustomTableCell>Last Name</CustomTableCell>
               <CustomTableCell>Phone</CustomTableCell>
-              <CustomTableCell>Order's Detail</CustomTableCell>
-              <CustomTableCell>Due Date</CustomTableCell>
-              <CustomTableCell>Total Cost</CustomTableCell>
-              <CustomTableCell>Payment Receive</CustomTableCell>
-              <CustomTableCell>Complete</CustomTableCell>
               <CustomTableCell>Edit</CustomTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {this.props.customerList.map((customer, index) => {
-              if (customer.complete === false) {
                 return (
                   <TableRow className={classes.row} key={index}>
                     <CustomTableCell component="th" scope="row">
-                      {customer.orderNumber}
+                    {customer.firstName} 
                     </CustomTableCell>
-                    <CustomTableCell>{customer.firstName} {customer.lastName}</CustomTableCell>
+                    <CustomTableCell>{customer.lastName}</CustomTableCell>
                     <CustomTableCell>{customer.phone}</CustomTableCell>
-                    <CustomTableCell><button>Show Details</button></CustomTableCell>
-                    <CustomTableCell>{(new Date(customer.pickUp)).toLocaleDateString()}</CustomTableCell>
-                    <CustomTableCell >${customer.totalCost}</CustomTableCell>
-                    <CustomTableCell>{customer.paid.toString()}</CustomTableCell>
-                    <CustomTableCell>
-                      <Checkbox
-                        onClick={() => this.handleComplete(customer._id)}
-                      />
-                    </CustomTableCell>
-                    <CustomTableCell numeric>
-                    <button onclick={() => this.handleEdit(customer)}>Edit</button>
-                    </CustomTableCell>
+                    <CustomTableCell numeric><button>Edit</button></CustomTableCell>
                   </TableRow>
                 );
-              }
             })}
           </TableBody>
         </Table>
@@ -114,7 +95,7 @@ class currentTable extends Component {
   }
 }
 
-const styleCurrentTable = withStyles(styles)(currentTable)
+const styleCustomerTable = withStyles(styles)(CustomerTable)
 
-export default connect(mapStateToProps)(styleCurrentTable);
+export default connect(mapStateToProps)(styleCustomerTable);
 

@@ -33,6 +33,7 @@ class NewOrder extends Component {
         paid: false,
         complete: false
       },
+      alert: null,
     };
   }
 
@@ -105,6 +106,13 @@ class NewOrder extends Component {
     this.props.history.push('/success')
   }
 
+  hideAlert() {
+    console.log('Hiding alert...');
+    this.setState({
+      alert: null
+    });
+  }
+  
   render() {
     let content = null;
 
