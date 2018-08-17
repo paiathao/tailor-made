@@ -7,6 +7,7 @@ import axios from 'axios';
 export default function* rootSaga() {
   yield takeEvery('FETCH_SERVICES', fetchServices)
   yield takeEvery('ADD_SERVICES', addServices)
+  yield takeEvery('POST_CUSTOMER', postCustomer)
   yield all([
     userSaga(),
     loginSaga(),
@@ -32,3 +33,13 @@ function* fetchServices() {
     yield console.log(err);
   }
 } 
+
+function* postCustomer(action) {
+  try{
+    console.log('in post saga', action.payload);
+    yield call(axios.post, '/api/customer', action.payload)
+
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -12,7 +12,6 @@ class ServiceTotal extends Component {
     tax = 0;
 
     saveState() {
-        console.log(this.totalCost);
         this.props.dispatch({
             type: 'ADD_TOTALCOST',
             payload: this.totalCost

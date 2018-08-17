@@ -8,7 +8,7 @@ const CustomerSchema = new Schema({
     lastName: { type: String, required: true },
     phone: { type: String, required: true },
     orderNumber: { type: String, required: true },
-    orderDetails: { type: [String], required: true },
+    orderDetails: { type: [], required: true },
     totalCost: { type: String, required: true },
     dropDate: { type: Date, required: true },
     pickUp: { type: String, required: true },

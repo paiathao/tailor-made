@@ -15,6 +15,7 @@ import CurrentOrders from './components/CurrentOrders/CurrentOrders';
 import CompleteOrders from './components/CompleteOrders/CompleteOrders';
 import CustomersBoard from './components/CustomersBoard/CustomersBoard';
 import BusinessReports from './components/BusinessReports/BusinessReports';
+import Success from './components/Success/Success'
 
 import './styles/main.css';
 
@@ -41,21 +42,25 @@ const App = () => (
           component={NewOrder}
         />
         <Route
+          path="/success"
+          component={Success}
+        />
+        <Route
           path="/currentOrders"
           component={CurrentOrders}
         />
         <Route
           path="/completeOrders"
           component={CompleteOrders}
-        />  
+        />
         <Route
           path="/customersBoard"
           component={CustomersBoard}
-        />  
+        />
         <Route
           path="/businessReports"
           component={BusinessReports}
-        />         
+        />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
 

@@ -6,11 +6,13 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 
 const mapStateToProps = state => ({
   user: state.user,
+  newCustomer: state.newCustomer
 });
 
-class CurrentOrders extends Component {
+class Success extends Component {
   componentDidMount() {
-    this.props.dispatch({type: USER_ACTIONS.FETCH_USER}); 
+    this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
+    this.props.dispatch({type: 'POST_CUSTOMER', payload: this.props.newCustomer})
   }
 
   componentDidUpdate() {
@@ -26,7 +28,7 @@ class CurrentOrders extends Component {
       content = (
         <div>
           <p>
-            Current Order
+          Confirmation
           </p>
         </div>
       );
@@ -42,4 +44,4 @@ class CurrentOrders extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(CurrentOrders);
+export default connect(mapStateToProps)(Success);

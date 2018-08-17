@@ -103,7 +103,7 @@ class NewOrder extends Component {
       type: 'ADD_CUSTOMER',
       payload: this.state.newCustomer
     })
-    this.props.history.push('/dashboard')
+    this.props.history.push('/success')
   }
 
   render() {
