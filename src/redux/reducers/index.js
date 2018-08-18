@@ -38,7 +38,7 @@ const newCustomer = (state = defaultState, action) => {
     case 'NEW_SERVICES':
       return {
         ...state,
-        orderDetails: [...state.orderDetails, ...action.payload] 
+        orderDetails: [...state.orderDetails, ...action.payload]
       }
     case 'ADD_CUSTOMER':
       return {
@@ -51,10 +51,23 @@ const newCustomer = (state = defaultState, action) => {
         pickUp: action.payload.pickUp,
         paid: action.payload.paid,
       }
-      case 'ADD_TOTALCOST':
+    case 'ADD_TOTALCOST':
       return {
         ...state,
         totalCost: action.payload
+      }
+    case 'RESET_CUSTOMER':
+      return {
+        firstName: '',
+        lastName: '',
+        phone: '',
+        orderNumber: '',
+        orderDetails: [],
+        totalCost: '',
+        dropDate: '',
+        pickUp: '',
+        paid: false,
+        complete: false
       }
     default:
       return state;

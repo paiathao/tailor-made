@@ -3,44 +3,22 @@ import { connect } from 'react-redux';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
+//import others components
+import Nav from '../../components/Nav/Nav';
+import ServiceSelector from '../ServiceSelector/ServiceSelector';
+
+//import for styling
+import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import Checkbox from '@material-ui/core/Checkbox';
 import NumberFormat from 'react-number-format';
 
-//import others components
-import Nav from '../../components/Nav/Nav';
-import ServiceTable from '../ServiceTable/ServiceTable'
-import ServiceList from '../ServiceList/ServiceList'
-import ServiceTotal from '../ServiceTotal/ServiceTotal'
-
-//import for styling
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Slide from '@material-ui/core/Slide';
-import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-
 const mapStateToProps = state => ({
   user: state.user,
 });
 
-//styles for dialog
-const styles = {
-  appBar: {
-    position: 'relative',
-  },
-  flex: {
-    flex: 1,
-  },
-};
-
-function Transition(props) {
-  return <Slide direction="up" {...props} />;
-}
 
 class NewOrder extends Component {
   constructor(props) {
@@ -57,18 +35,8 @@ class NewOrder extends Component {
         complete: false
       },
       alert: null,
-      open: false,
     };
   }
-
-  //function for dialog
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
 
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
@@ -141,7 +109,6 @@ class NewOrder extends Component {
 
   render() {
     let content = null;
-    const { classes } = this.props;
 
     if (this.props.user.userName) {
       content = (
@@ -195,24 +162,7 @@ class NewOrder extends Component {
                 maxTime={moment().hours(20).minutes(0)}
                 dateFormat="LLL" />
             </FormGroup>
-            <Button onClick={this.handleClickOpen}>Select Services</Button>
-            <Dialog
-              fullScreen
-              open={this.state.open}
-              onClose={this.handleClose}
-              TransitionComponent={Transition}
-            >
-              <AppBar className={classes.appBar}>
-                <Toolbar>
-                  <Button color="inherit" onClick={this.handleClose}>
-                    Close
-                </Button>
-                </Toolbar>
-              </AppBar>
-              <ServiceTable />
-            </Dialog>
-            <ServiceList />
-            <ServiceTotal />
+            <ServiceSelector/>
             <label>Payent Receive</label>
             <Checkbox
               onChange={this.updatePayment}
@@ -232,6 +182,4 @@ class NewOrder extends Component {
   }
 }
 
-const newOrderWithStyles = withStyles(styles)(NewOrder);
-
-export default connect(mapStateToProps)(newOrderWithStyles);
+export default connect(mapStateToProps)(NewOrder);

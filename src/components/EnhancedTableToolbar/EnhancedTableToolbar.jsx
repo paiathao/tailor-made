@@ -35,15 +35,6 @@ const toolbarStyles = theme => ({
     },
 });
 
-const styles = theme => ({
-    button: {
-      margin: theme.spacing.unit,
-    },
-    extendedIcon: {
-      marginRight: theme.spacing.unit,
-    },
-  });
-
 class EnhancedTableToolbar extends React.Component {
 
     addServices = (selected) => {
@@ -84,7 +75,7 @@ class EnhancedTableToolbar extends React.Component {
                         </Tooltip>
                     ) : (
                             <Tooltip title="Collapse">
-                                <IconButton disabled>
+                                <IconButton>
                                     <AddIcon />
                                 </IconButton>
                             </Tooltip>
