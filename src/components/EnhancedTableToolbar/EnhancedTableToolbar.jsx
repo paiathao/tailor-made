@@ -4,9 +4,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import AddIcon from '@material-ui/icons/Add';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import { connect } from 'react-redux';
 
@@ -34,6 +34,15 @@ const toolbarStyles = theme => ({
         flex: '0 0 auto',
     },
 });
+
+const styles = theme => ({
+    button: {
+      margin: theme.spacing.unit,
+    },
+    extendedIcon: {
+      marginRight: theme.spacing.unit,
+    },
+  });
 
 class EnhancedTableToolbar extends React.Component {
 
@@ -69,14 +78,14 @@ class EnhancedTableToolbar extends React.Component {
                 <div className={classes.actions}>
                     {numSelected > 0 ? (
                         <Tooltip title="Add">
-                            <IconButton aria-label="Add">
+                            <Button variant="fab" color="secondary" aria-label="Add" className={classes.button}>
                                 <AddIcon onClick={() => this.addServices(selected)} />
-                            </IconButton>
+                            </Button>
                         </Tooltip>
                     ) : (
                             <Tooltip title="Collapse">
-                                <IconButton>
-                                    <FilterListIcon />
+                                <IconButton disabled>
+                                    <AddIcon />
                                 </IconButton>
                             </Tooltip>
                         )}

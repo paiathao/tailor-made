@@ -65,7 +65,7 @@ class CompleteTable extends Component {
               </TableHead>
               <TableBody>
                 {this.props.customerList.map((customer, index) => {
-                    if (customer.complete == true) {
+                    if (customer.complete === true) {
                   return (
                     <TableRow className={classes.row} key={index}>
                       <CustomTableCell component="th" scope="row">
@@ -73,7 +73,7 @@ class CompleteTable extends Component {
                       </CustomTableCell>
                       <CustomTableCell>{customer.firstName} {customer.lastName}</CustomTableCell>
                       <CustomTableCell>{customer.phone}</CustomTableCell>
-                      <CustomTableCell>${customer.totalCost}</CustomTableCell>
+                      <CustomTableCell>{parseFloat(customer.totalCost).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</CustomTableCell>
                       <CustomTableCell>{(new Date(customer.pickUp)).toLocaleDateString()}</CustomTableCell>
                       <CustomTableCell><button>Edit</button></CustomTableCell>
                     </TableRow>
