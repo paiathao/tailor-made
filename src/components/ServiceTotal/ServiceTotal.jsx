@@ -6,7 +6,7 @@ const mapStateToProps = state => ({
 });
 
 class ServiceTotal extends Component {
-    
+
     totalCost = 0;
     sum = 0;
     tax = 0;
@@ -21,9 +21,12 @@ class ServiceTotal extends Component {
     render() {
 
         let array = this.props.services
-
+        this.sum = 0;
+        this.tax = 0;
+        this.totalCust = 0;
         array.forEach((value) => {
             this.sum += value.cost;
+            console.log('sum', this.sum)
             this.tax = (this.sum * 0.06);
             this.totalCost = (this.sum + this.tax);
         })

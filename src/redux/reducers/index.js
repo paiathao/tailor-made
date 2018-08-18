@@ -38,7 +38,7 @@ const newCustomer = (state = defaultState, action) => {
     case 'NEW_SERVICES':
       return {
         ...state,
-        orderDetails: action.payload
+        orderDetails: [...state.orderDetails, ...action.payload] 
       }
     case 'ADD_CUSTOMER':
       return {
