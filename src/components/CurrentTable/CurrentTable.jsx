@@ -93,7 +93,7 @@ class currentTable extends Component {
                     <CustomTableCell>{customer.phone}</CustomTableCell>
                     <CustomTableCell><button>Show Details</button></CustomTableCell>
                     <CustomTableCell>{(new Date(customer.pickUp)).toLocaleDateString()}</CustomTableCell>
-                    <CustomTableCell >${customer.totalCost}</CustomTableCell>
+                    <CustomTableCell >{parseFloat(customer.totalCost).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</CustomTableCell>
                     <CustomTableCell>{customer.paid.toString()}</CustomTableCell>
                     <CustomTableCell>
                       <Checkbox
@@ -101,7 +101,7 @@ class currentTable extends Component {
                       />
                     </CustomTableCell>
                     <CustomTableCell numeric>
-                    <button onclick={() => this.handleEdit(customer)}>Edit</button>
+                    <button onClick={() => this.handleEdit(customer)}>Edit</button>
                     </CustomTableCell>
                   </TableRow>
                 );

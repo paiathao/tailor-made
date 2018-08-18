@@ -19,7 +19,7 @@ class ServiceList extends Component {
 
         return (
             <div>
-                <h3>Service Added </h3>
+                <h3>Service Summary </h3>
                 <ul>
                     {serviceListItemArray}
                 </ul>
