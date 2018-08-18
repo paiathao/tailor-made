@@ -15,9 +15,31 @@ import ServiceSelector from '../ServiceSelector/ServiceSelector'
 import ServiceList from '../ServiceList/ServiceList'
 import ServiceTotal from '../ServiceTotal/ServiceTotal'
 
+//material-ui
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Slide from '@material-ui/core/Slide';
+
 const mapStateToProps = state => ({
   user: state.user,
 });
+
+//styles for dialog
+const styles = {
+  appBar: {
+    position: 'relative',
+  },
+  flex: {
+    flex: 1,
+  },
+};
+
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
 
 class NewOrder extends Component {
   constructor(props) {
@@ -34,8 +56,18 @@ class NewOrder extends Component {
         complete: false
       },
       alert: null,
+      open: false,
     };
   }
+
+  //function for dialog
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
@@ -106,15 +138,9 @@ class NewOrder extends Component {
     this.props.history.push('/success')
   }
 
-  hideAlert() {
-    console.log('Hiding alert...');
-    this.setState({
-      alert: null
-    });
-  }
-  
   render() {
     let content = null;
+    const { classes } = this.props;
 
     if (this.props.user.userName) {
       content = (
@@ -127,12 +153,12 @@ class NewOrder extends Component {
             value={this.state.newCustomer.lastName}
             onChange={this.handleChangeFor('lastName')}
           />
-          <NumberFormat 
-          placeholder="Phone"
-          value={this.state.newCustomer.phone}
-          onChange={this.handleChangeFor('phone')}
-          format="(###) ###-####" 
-          mask="_"/>
+          <NumberFormat
+            placeholder="Phone"
+            value={this.state.newCustomer.phone}
+            onChange={this.handleChangeFor('phone')}
+            format="(###) ###-####"
+            mask="_" />
           <input type="number" placeholder="Order #"
             value={this.state.newCustomer.orderNumber}
             onChange={this.handleChangeFor('orderNumber')}
@@ -149,7 +175,22 @@ class NewOrder extends Component {
             minTime={moment().hours(10).minutes(0)}
             maxTime={moment().hours(20).minutes(0)}
             dateFormat="LLL" />
-          <ServiceSelector />
+          <Button onClick={this.handleClickOpen}>Select Services</Button>
+          <Dialog
+            fullScreen
+            open={this.state.open}
+            onClose={this.handleClose}
+            TransitionComponent={Transition}
+          >
+            <AppBar className={classes.appBar}>
+              <Toolbar>
+                <Button color="inherit" onClick={this.handleClose}>
+                  Close
+                </Button>
+              </Toolbar>
+            </AppBar>
+            <ServiceSelector />
+          </Dialog>
           <ServiceList />
           <ServiceTotal />
           <label>Payent Receive</label>
@@ -172,4 +213,6 @@ class NewOrder extends Component {
   }
 }
 
-export default connect(mapStateToProps)(NewOrder);
+const newOrderWithStyles = withStyles(styles)(NewOrder);
+
+export default connect(mapStateToProps)(newOrderWithStyles);
