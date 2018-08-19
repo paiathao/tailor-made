@@ -30,8 +30,12 @@ class ServiceTotal extends Component {
             this.totalCost = (this.sum + this.tax);
         })
 
-        this.saveState();
-
+        if (array.length > 0) {
+            this.saveState();
+        } else {
+            this.totalCost = 0;
+        }
+        
         return (
             <div>
                 <p> Subtotal Cost: {this.sum.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} </p>

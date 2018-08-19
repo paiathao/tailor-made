@@ -9,7 +9,6 @@ import Button from '@material-ui/core/Button';
 
 import ServiceTable from '../ServiceTable/ServiceTable';
 import ServiceList from '../ServiceList/ServiceList'
-import ServiceTotal from '../ServiceTotal/ServiceTotal'
 
 //styles for dialog
 const styles = {
@@ -68,7 +67,6 @@ class ServiceSelector extends Component {
               <ServiceTable />
             </Dialog>
             <ServiceList />
-            <ServiceTotal />
             </div>
         );
     }

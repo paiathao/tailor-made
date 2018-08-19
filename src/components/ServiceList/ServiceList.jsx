@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import ServiceTotal from '../ServiceTotal/ServiceTotal'
+
 const mapStateToProps = state => ({
     services: state.newCustomer.orderDetails
 });
@@ -29,6 +31,7 @@ class ServiceList extends Component {
                 <ul>
                     {serviceListItemArray}
                 </ul>
+                <ServiceTotal />
             </div>
         );
     }

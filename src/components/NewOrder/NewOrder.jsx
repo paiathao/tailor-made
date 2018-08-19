@@ -113,44 +113,44 @@ class NewOrder extends Component {
     if (this.props.user.userName) {
       content = (
         <form>
-            <div class="form-group">
+            <div className="form-group">
               <label for="firstName">First Name</label>
-              <input class="form-control" type="text" placeholder="First Name"
+              <input className="form-control" type="text" placeholder="First Name"
                 value={this.state.newCustomer.firstName}
                 onChange={this.handleChangeFor('firstName')}
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label for="lastName">Last Name</label>
-              <input class="form-control" type="text" placeholder="Last Name"
+              <input className="form-control" type="text" placeholder="Last Name"
                 value={this.state.newCustomer.lastName}
                 onChange={this.handleChangeFor('lastName')}
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label for="phone">Phone</label>
-              <NumberFormat class="form-control"
+              <NumberFormat className="form-control"
                 placeholder="Phone"
                 value={this.state.newCustomer.phone}
                 onChange={this.handleChangeFor('phone')}
                 format="(###) ###-####"
                 mask="_" />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label for="orderNumber">Order #</label>
-              <input class="form-control" type="number" placeholder="Order #"
+              <input className="form-control" type="number" placeholder="Order #"
                 value={this.state.newCustomer.orderNumber}
                 onChange={this.handleChangeFor('orderNumber')}
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label for="dropDate">Drop-off Date</label>
               <DatePicker  
                 selected={this.state.newCustomer.dropDate}
                 onChange={this.handleChangeForDropOff}
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label for="pickupDate">Pick-up Date & Time</label>
               <DatePicker
                 selected={this.state.newCustomer.pickUp}
@@ -161,7 +161,7 @@ class NewOrder extends Component {
                 maxTime={moment().hours(20).minutes(0)}
                 dateFormat="LLL" />
             </div>
-            <div class="form-group">
+            <div className="form-group">
             <ServiceSelector/>
             <label for="payment">Payent Receive</label>
             <Checkbox
