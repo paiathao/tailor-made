@@ -10,8 +10,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Edit from '@material-ui/icons/Edit'
 
 //styles
 const CustomTableCell = withStyles(theme => ({

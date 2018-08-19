@@ -38,11 +38,7 @@ const toolbarStyles = theme => ({
 class EnhancedTableToolbar extends React.Component {
 
     addServices = (selected) => {
-        this.props.dispatch({
-            type: 'ADD_SERVICES',
-            payload: selected,
-        })
-
+        this.props.handleClose(selected);
     }
 
     render() {
@@ -69,12 +65,15 @@ class EnhancedTableToolbar extends React.Component {
                 <div className={classes.actions}>
                     {numSelected > 0 ? (
                         <Tooltip title="Add">
-                            <Button variant="fab" color="secondary" aria-label="Add" className={classes.button}>
-                                <AddIcon onClick={() => this.addServices(selected)} />
+                            <Button variant="fab" color="secondary" aria-label="Add"
+                                className={classes.button}
+                                onClick={() => this.addServices(selected)}
+                            >
+                                <AddIcon />
                             </Button>
                         </Tooltip>
                     ) : (
-                            <Tooltip title="Collapse">
+                            <Tooltip title="Add">
                                 <IconButton>
                                     <AddIcon />
                                 </IconButton>

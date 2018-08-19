@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Slide from '@material-ui/core/Slide';
-// import Button from '@material-ui/core/Button';
 import { Button } from 'reactstrap';
 
 import ServiceTable from '../ServiceTable/ServiceTable';
-import ServiceList from '../ServiceList/ServiceList'
 
 //styles for dialog
 const styles = {
@@ -40,7 +37,12 @@ class ServiceSelector extends Component {
         this.setState({ open: true });
     };
 
-    handleClose = () => {
+    handleClose = (selected) => {
+        console.log('close', selected)
+        this.props.dispatch({
+            type: 'ADD_SERVICES',
+            payload: selected,
+        })
         this.setState({ open: false });
     };
 
@@ -51,27 +53,21 @@ class ServiceSelector extends Component {
 
         return (
             <div>
-            <Button color="info" onClick={this.handleClickOpen} >Select Services</Button>
-            <Dialog
-              fullScreen
-              open={this.state.open}
-              onClose={this.handleClose}
-              TransitionComponent={Transition}
-            >
-              <AppBar className={classes.appBar}>
-                <Toolbar>
-                  <Button color="primary" onClick={this.handleClose}>
-                    Close
-                </Button>
-                </Toolbar>
-              </AppBar>
-              <ServiceTable />
-            </Dialog>
-            <ServiceList />
+                <Button color="info" onClick={this.handleClickOpen} >Select Services</Button>
+                <Dialog
+                    fullScreen
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    TransitionComponent={Transition}
+                >
+                    <ServiceTable handleClose={this.handleClose} />
+                </Dialog>
             </div>
         );
     }
 }
 
-export default withStyles(styles)(ServiceSelector);
+const ServiceSelectorStyles = withStyles(styles)(ServiceSelector);
+
+export default connect()(ServiceSelectorStyles);
 

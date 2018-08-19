@@ -6,6 +6,7 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 //import others components
 import Nav from '../../components/Nav/Nav';
 import ServiceSelector from '../ServiceSelector/ServiceSelector';
+import ServiceList from '../ServiceList/ServiceList'
 
 //import for styling
 import DatePicker from 'react-datepicker';
@@ -113,62 +114,65 @@ class NewOrder extends Component {
       content = (
 
         <form className="newOrder">
-            <div className="form-group">
-              <label>First Name</label>
-              <input className="form-control" type="text" placeholder="First Name"
-                value={this.state.newCustomer.firstName}
-                onChange={this.handleChangeFor('firstName')}
-              />
-            </div>
-            <div className="form-group">
-              <label>Last Name</label>
-              <input className="form-control" type="text" placeholder="Last Name"
-                value={this.state.newCustomer.lastName}
-                onChange={this.handleChangeFor('lastName')}
-              />
-            </div>
-            <div className="form-group">
-              <label>Phone</label>
-              <NumberFormat className="form-control"
-                placeholder="Phone"
-                value={this.state.newCustomer.phone}
-                onChange={this.handleChangeFor('phone')}
-                format="(###) ###-####"
-                mask="_" />
-            </div>
-            <div className="form-group">
-              <label>Order #</label>
-              <input className="form-control" type="number" placeholder="Order #"
-                value={this.state.newCustomer.orderNumber}
-                onChange={this.handleChangeFor('orderNumber')}
-              />
-            </div>
-            <div className="form-group">
-              <label>Drop-off Date</label>
-              <DatePicker  
-                selected={this.state.newCustomer.dropDate}
-                onChange={this.handleChangeForDropOff}
-              />
-            </div>
-            <div className="form-group">
-              <label>Pick-up Date & Time</label>
-              <DatePicker
-                selected={this.state.newCustomer.pickUp}
-                onChange={this.handleChangeForPickUp}
-                showTimeSelect
-                timeIntervals={60}
-                minTime={moment().hours(10).minutes(0)}
-                maxTime={moment().hours(20).minutes(0)}
-                dateFormat="LLL" />
-            </div>
-            <div className="form-group">
-            <ServiceSelector/>
+          <div className="form-group">
+            <label>First Name</label>
+            <input className="form-control" type="text" placeholder="First Name"
+              value={this.state.newCustomer.firstName}
+              onChange={this.handleChangeFor('firstName')}
+            />
+          </div>
+          <div className="form-group">
+            <label>Last Name</label>
+            <input className="form-control" type="text" placeholder="Last Name"
+              value={this.state.newCustomer.lastName}
+              onChange={this.handleChangeFor('lastName')}
+            />
+          </div>
+          <div className="form-group">
+            <label>Phone</label>
+            <NumberFormat className="form-control"
+              placeholder="Phone"
+              value={this.state.newCustomer.phone}
+              onChange={this.handleChangeFor('phone')}
+              format="(###) ###-####"
+              mask="_" />
+          </div>
+          <div className="form-group">
+            <label>Order #</label>
+            <input className="form-control" type="number" placeholder="Order #"
+              value={this.state.newCustomer.orderNumber}
+              onChange={this.handleChangeFor('orderNumber')}
+            />
+          </div>
+          <div className="form-group">
+            <label>Drop-off Date</label>
+            <DatePicker
+              selected={this.state.newCustomer.dropDate}
+              onChange={this.handleChangeForDropOff}
+            />
+          </div>
+          <div className="form-group">
+            <label>Pick-up Date & Time</label>
+            <DatePicker
+              selected={this.state.newCustomer.pickUp}
+              onChange={this.handleChangeForPickUp}
+              showTimeSelect
+              timeIntervals={60}
+              minTime={moment().hours(10).minutes(0)}
+              maxTime={moment().hours(20).minutes(0)}
+              dateFormat="LLL" />
+          </div>
+          <div className="form-group">
+            <ServiceSelector />
+          </div>
+          <div>
+            <ServiceList />
             <label>Payment Receive</label>
             <Checkbox
               onChange={this.updatePayment}
             />
-          <Button onClick={this.handleSubmit} class="btn btn-primary">Submit</Button>
           </div>
+          <Button onClick={this.handleSubmit} class="btn btn-primary">Submit</Button>
         </form>
       );
     }

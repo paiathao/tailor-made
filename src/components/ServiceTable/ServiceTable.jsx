@@ -80,7 +80,9 @@ class ServiceTable extends React.Component {
 
     return (
       <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} selected={this.state.selected} />
+        <EnhancedTableToolbar numSelected={selected.length}
+          selected={this.state.selected}
+          handleClose={this.props.handleClose} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead

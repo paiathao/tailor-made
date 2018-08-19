@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 
 //import for styling
-import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import Checkbox from '@material-ui/core/Checkbox';
 import NumberFormat from 'react-number-format';
-import Button from '@material-ui/core/Button'
-
-import ServiceSelector from '../ServiceSelector/ServiceSelector';
-import Payment from '../Payment/Payment'
 
 class EditForm extends Component {
     constructor(props) {
@@ -29,24 +23,6 @@ class EditForm extends Component {
         };
     }
 
-    handleChangeForDropOff = (date) => {
-        this.setState({
-            customer: {
-                ...this.state.customer,
-                dropDate: date
-            }
-        })
-    }
-
-    handleChangeForPickUp = (date) => {
-        this.setState({
-            customer: {
-                ...this.state.customer,
-                pickUp: date
-            }
-        })
-    }
-
     handleChangeFor = (propertyName) => {
         return (event) => {
             this.setState({
@@ -57,27 +33,6 @@ class EditForm extends Component {
             })
         }
     }
-
-    updatePayment = () => {
-
-        if (this.state.customer.paid === false) {
-            this.setState({
-                customer: {
-                    ...this.state.customer,
-                    paid: true
-                }
-            })
-        } else {
-            this.setState({
-                customer: {
-                    ...this.state.customer,
-                    paid: false
-                }
-            })
-        }
-
-    }
-
 
     render() {
 
