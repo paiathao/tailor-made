@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import OrdersDetail from '../OrdersDetail/OrdersDetail'
 
 //material-ui
 import { withStyles } from '@material-ui/core/styles';
@@ -73,7 +74,7 @@ class currentTable extends Component {
               <CustomTableCell>Order #</CustomTableCell>
               <CustomTableCell>Customer's Name</CustomTableCell>
               <CustomTableCell>Phone</CustomTableCell>
-              <CustomTableCell>Order's Detail</CustomTableCell>
+              <CustomTableCell>Service Detail</CustomTableCell>
               <CustomTableCell>Due Date</CustomTableCell>
               <CustomTableCell>Total Cost</CustomTableCell>
               <CustomTableCell>Payment Receive</CustomTableCell>
@@ -91,7 +92,7 @@ class currentTable extends Component {
                     </CustomTableCell>
                     <CustomTableCell>{customer.firstName} {customer.lastName}</CustomTableCell>
                     <CustomTableCell>{customer.phone}</CustomTableCell>
-                    <CustomTableCell><button>Show Details</button></CustomTableCell>
+                    <CustomTableCell><OrdersDetail customer={customer}/></CustomTableCell>
                     <CustomTableCell>{(new Date(customer.pickUp)).toLocaleDateString()}</CustomTableCell>
                     <CustomTableCell >{parseFloat(customer.totalCost).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</CustomTableCell>
                     <CustomTableCell>{customer.paid.toString()}</CustomTableCell>
