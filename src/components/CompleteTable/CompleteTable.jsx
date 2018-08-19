@@ -61,10 +61,9 @@ class CompleteTable extends Component {
               <CustomTableCell>Order #</CustomTableCell>
               <CustomTableCell>Customer's Name</CustomTableCell>
               <CustomTableCell>Phone</CustomTableCell>
-              <CustomTableCell>Service Detail</CustomTableCell>
+              <CustomTableCell>Service Details</CustomTableCell>
               <CustomTableCell>Complete Date</CustomTableCell>
               <CustomTableCell>Total</CustomTableCell>
-              <CustomTableCell>Edit</CustomTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -80,13 +79,6 @@ class CompleteTable extends Component {
                     <CustomTableCell><OrdersDetail customer={customer} /></CustomTableCell>
                     <CustomTableCell>{(new Date(customer.pickUp)).toLocaleDateString()}</CustomTableCell>
                     <CustomTableCell>{parseFloat(customer.totalCost).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</CustomTableCell>
-                    <CustomTableCell>
-                      <Button color="secondary" aria-label="Edit" className={classes.button}
-                        onClick={() => this.handleEdit(customer)}
-                      >
-                        <Edit />
-                      </Button>
-                    </CustomTableCell>
                   </TableRow>
                 );
               }

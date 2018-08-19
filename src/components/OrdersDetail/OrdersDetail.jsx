@@ -28,9 +28,9 @@ class OrdersDetail extends React.Component {
 
         let itemArray = this.item.map((item, index) => {
             return (
-                <li key={index}>
+                <p key={index}>
                     Category: {item.category}, Service: {item.service} Cost: {item.cost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} 
-                </li>
+                </p>
             )
         })
 
@@ -38,7 +38,7 @@ class OrdersDetail extends React.Component {
 
         return (
             <div>
-                <Button onClick={this.handleClickOpen}><DetailIcon /></Button>
+                <Button onClick={this.handleClickOpen}>Show Details<DetailIcon /></Button>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}

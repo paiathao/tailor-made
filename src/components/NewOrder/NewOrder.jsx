@@ -19,7 +19,6 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
-
 class NewOrder extends Component {
   constructor(props) {
     super(props)
@@ -112,23 +111,24 @@ class NewOrder extends Component {
 
     if (this.props.user.userName) {
       content = (
-        <form>
+
+        <form className="newOrder">
             <div className="form-group">
-              <label for="firstName">First Name</label>
+              <label>First Name</label>
               <input className="form-control" type="text" placeholder="First Name"
                 value={this.state.newCustomer.firstName}
                 onChange={this.handleChangeFor('firstName')}
               />
             </div>
             <div className="form-group">
-              <label for="lastName">Last Name</label>
+              <label>Last Name</label>
               <input className="form-control" type="text" placeholder="Last Name"
                 value={this.state.newCustomer.lastName}
                 onChange={this.handleChangeFor('lastName')}
               />
             </div>
             <div className="form-group">
-              <label for="phone">Phone</label>
+              <label>Phone</label>
               <NumberFormat className="form-control"
                 placeholder="Phone"
                 value={this.state.newCustomer.phone}
@@ -137,21 +137,21 @@ class NewOrder extends Component {
                 mask="_" />
             </div>
             <div className="form-group">
-              <label for="orderNumber">Order #</label>
+              <label>Order #</label>
               <input className="form-control" type="number" placeholder="Order #"
                 value={this.state.newCustomer.orderNumber}
                 onChange={this.handleChangeFor('orderNumber')}
               />
             </div>
             <div className="form-group">
-              <label for="dropDate">Drop-off Date</label>
+              <label>Drop-off Date</label>
               <DatePicker  
                 selected={this.state.newCustomer.dropDate}
                 onChange={this.handleChangeForDropOff}
               />
             </div>
             <div className="form-group">
-              <label for="pickupDate">Pick-up Date & Time</label>
+              <label>Pick-up Date & Time</label>
               <DatePicker
                 selected={this.state.newCustomer.pickUp}
                 onChange={this.handleChangeForPickUp}
@@ -163,11 +163,11 @@ class NewOrder extends Component {
             </div>
             <div className="form-group">
             <ServiceSelector/>
-            <label for="payment">Payent Receive</label>
+            <label>Payment Receive</label>
             <Checkbox
               onChange={this.updatePayment}
             />
-          <Button onClick={this.handleSubmit}>Submit</Button>
+          <Button onClick={this.handleSubmit} class="btn btn-primary">Submit</Button>
           </div>
         </form>
       );

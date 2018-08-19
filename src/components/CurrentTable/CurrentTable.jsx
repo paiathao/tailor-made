@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import OrdersDetail from '../OrdersDetail/OrdersDetail'
 import Payment from '../Payment/Payment'
+import moment from 'moment';
 
 //material-ui
 import { withStyles } from '@material-ui/core/styles';
@@ -12,8 +13,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
-import Edit from '@material-ui/icons/Edit'
+import EditButton from '../EditButton/EditButton';
 
 //styles
 const CustomTableCell = withStyles(theme => ({
@@ -77,8 +77,9 @@ class currentTable extends Component {
               <CustomTableCell>Order #</CustomTableCell>
               <CustomTableCell>Customer's Name</CustomTableCell>
               <CustomTableCell>Phone</CustomTableCell>
-              <CustomTableCell>Service Detail</CustomTableCell>
-              <CustomTableCell>Due Date</CustomTableCell>
+              <CustomTableCell>Service Details</CustomTableCell>
+              <CustomTableCell>Drop-off Date</CustomTableCell>
+              <CustomTableCell>Due Date & Time</CustomTableCell>
               <CustomTableCell>Total Cost</CustomTableCell>
               <CustomTableCell>Payment Receive</CustomTableCell>
               <CustomTableCell>Complete</CustomTableCell>
@@ -96,7 +97,8 @@ class currentTable extends Component {
                     <CustomTableCell>{customer.firstName} {customer.lastName}</CustomTableCell>
                     <CustomTableCell>{customer.phone}</CustomTableCell>
                     <CustomTableCell><OrdersDetail customer={customer} /></CustomTableCell>
-                    <CustomTableCell>{(new Date(customer.pickUp)).toLocaleDateString()}</CustomTableCell>
+                    <CustomTableCell>{(new Date(customer.dropDate)).toLocaleDateString()}</CustomTableCell>
+                    <CustomTableCell>{(moment(customer.pickUp)).format('LLL')}</CustomTableCell>
                     <CustomTableCell >{parseFloat(customer.totalCost).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</CustomTableCell>
                     <CustomTableCell><Payment customer={customer} /></CustomTableCell>
                     <CustomTableCell>
@@ -105,11 +107,7 @@ class currentTable extends Component {
                       />
                     </CustomTableCell>
                     <CustomTableCell>
-                      <Button color="secondary" aria-label="Edit" className={classes.button}
-                        onClick={() => this.handleEdit(customer)}
-                      >
-                        <Edit />
-                      </Button>
+                      <EditButton customer={customer}/>
                     </CustomTableCell>
                   </TableRow>
                 );

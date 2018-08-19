@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ThumbDownAltTwoTone from '@material-ui/icons/ThumbDown'
-import ThumbUp from '@material-ui/icons/ThumbUpAltTwoTone'
+import ThumbDown from '@material-ui/icons/ThumbDown'
+import ThumbUp from '@material-ui/icons/ThumbUp'
 
 class Payment extends Component {
 
@@ -11,9 +11,9 @@ class Payment extends Component {
         let icon;
 
         if (paid === true) {
-            icon = <ThumbUp />
+            icon = <p><ThumbUp /> Yes</p>
         } else {
-            icon = <ThumbDownAltTwoTone />
+            icon = <p><ThumbDown /> No</p>
         }
 
         return (

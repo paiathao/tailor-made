@@ -5,7 +5,8 @@ import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Slide from '@material-ui/core/Slide';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
+import { Button } from 'reactstrap';
 
 import ServiceTable from '../ServiceTable/ServiceTable';
 import ServiceList from '../ServiceList/ServiceList'
@@ -50,7 +51,7 @@ class ServiceSelector extends Component {
 
         return (
             <div>
-            <Button onClick={this.handleClickOpen}>Select Services</Button>
+            <Button color="info" onClick={this.handleClickOpen} >Select Services</Button>
             <Dialog
               fullScreen
               open={this.state.open}
@@ -59,7 +60,7 @@ class ServiceSelector extends Component {
             >
               <AppBar className={classes.appBar}>
                 <Toolbar>
-                  <Button color="inherit" onClick={this.handleClose}>
+                  <Button color="primary" onClick={this.handleClose}>
                     Close
                 </Button>
                 </Toolbar>
