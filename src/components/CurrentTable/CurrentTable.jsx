@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import OrdersDetail from '../OrdersDetail/OrdersDetail'
+import Payment from '../Payment/Payment'
 
 //material-ui
 import { withStyles } from '@material-ui/core/styles';
@@ -11,6 +12,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
+import Edit from '@material-ui/icons/Edit'
 
 //styles
 const CustomTableCell = withStyles(theme => ({
@@ -92,17 +95,21 @@ class currentTable extends Component {
                     </CustomTableCell>
                     <CustomTableCell>{customer.firstName} {customer.lastName}</CustomTableCell>
                     <CustomTableCell>{customer.phone}</CustomTableCell>
-                    <CustomTableCell><OrdersDetail customer={customer}/></CustomTableCell>
+                    <CustomTableCell><OrdersDetail customer={customer} /></CustomTableCell>
                     <CustomTableCell>{(new Date(customer.pickUp)).toLocaleDateString()}</CustomTableCell>
                     <CustomTableCell >{parseFloat(customer.totalCost).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</CustomTableCell>
-                    <CustomTableCell>{customer.paid.toString()}</CustomTableCell>
+                    <CustomTableCell><Payment customer={customer} /></CustomTableCell>
                     <CustomTableCell>
                       <Checkbox
                         onClick={() => this.handleComplete(customer._id)}
                       />
                     </CustomTableCell>
-                    <CustomTableCell numeric>
-                    <button onClick={() => this.handleEdit(customer)}>Edit</button>
+                    <CustomTableCell>
+                      <Button color="secondary" aria-label="Edit" className={classes.button}
+                        onClick={() => this.handleEdit(customer)}
+                      >
+                        <Edit />
+                      </Button>
                     </CustomTableCell>
                   </TableRow>
                 );

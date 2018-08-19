@@ -8,12 +8,12 @@ import Nav from '../../components/Nav/Nav';
 import ServiceSelector from '../ServiceSelector/ServiceSelector';
 
 //import for styling
-import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import Checkbox from '@material-ui/core/Checkbox';
 import NumberFormat from 'react-number-format';
+import Button from '@material-ui/core/Button'
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -112,47 +112,46 @@ class NewOrder extends Component {
 
     if (this.props.user.userName) {
       content = (
-        <Form>
-          <FormGroup>
-            <FormGroup>
-              <Label for="firstName">First Name</Label>
-              <Input type="text" placeholder="First Name"
+        <form>
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input class="form-control" type="text" placeholder="First Name"
                 value={this.state.newCustomer.firstName}
                 onChange={this.handleChangeFor('firstName')}
               />
-            </FormGroup>
-            <FormGroup>
-              <Label for="lastName">Last Name</Label>
-              <Input type="text" placeholder="Last Name"
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input class="form-control" type="text" placeholder="Last Name"
                 value={this.state.newCustomer.lastName}
                 onChange={this.handleChangeFor('lastName')}
               />
-            </FormGroup>
-            <FormGroup>
-              <Label for="phone">Phone</Label>
-              <NumberFormat
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <NumberFormat class="form-control"
                 placeholder="Phone"
                 value={this.state.newCustomer.phone}
                 onChange={this.handleChangeFor('phone')}
                 format="(###) ###-####"
                 mask="_" />
-            </FormGroup>
-            <FormGroup>
-              <Label for="orderNumber">Order #</Label>
-              <Input type="number" placeholder="Order #"
+            </div>
+            <div class="form-group">
+              <label for="orderNumber">Order #</label>
+              <input class="form-control" type="number" placeholder="Order #"
                 value={this.state.newCustomer.orderNumber}
                 onChange={this.handleChangeFor('orderNumber')}
               />
-            </FormGroup>
-            <FormGroup>
-              <Label for="dropDate">Drop-off Date</Label>
-              <DatePicker
+            </div>
+            <div class="form-group">
+              <label for="dropDate">Drop-off Date</label>
+              <DatePicker  
                 selected={this.state.newCustomer.dropDate}
                 onChange={this.handleChangeForDropOff}
               />
-            </FormGroup>
-            <FormGroup>
-              <Label for="PickupDate">Pick-up Date & Time</Label>
+            </div>
+            <div class="form-group">
+              <label for="pickupDate">Pick-up Date & Time</label>
               <DatePicker
                 selected={this.state.newCustomer.pickUp}
                 onChange={this.handleChangeForPickUp}
@@ -161,15 +160,16 @@ class NewOrder extends Component {
                 minTime={moment().hours(10).minutes(0)}
                 maxTime={moment().hours(20).minutes(0)}
                 dateFormat="LLL" />
-            </FormGroup>
+            </div>
+            <div class="form-group">
             <ServiceSelector/>
-            <label>Payent Receive</label>
+            <label for="payment">Payent Receive</label>
             <Checkbox
               onChange={this.updatePayment}
             />
-          </FormGroup>
           <Button onClick={this.handleSubmit}>Submit</Button>
-        </Form>
+          </div>
+        </form>
       );
     }
 

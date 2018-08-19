@@ -7,12 +7,18 @@ const mapStateToProps = state => ({
 
 class ServiceList extends Component {
 
+    handleDelete = (service) => {
+        console.log('delete', service)
+        this.props.dispatch({ type: 'DELETE_SERVICE', payload: service });
+    }
+
     render() {
 
         let serviceListItemArray = this.props.services.map((service, index) => {
             return (
                 <li key={index}>
                     Category: {service.category} Service: {service.service} Cost: {service.cost}
+                    <button onClick={() => this.handleDelete(service)}>Delete</button>
                 </li>
             )
         })

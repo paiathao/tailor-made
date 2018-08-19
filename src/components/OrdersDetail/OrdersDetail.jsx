@@ -38,7 +38,7 @@ class OrdersDetail extends React.Component {
 
         return (
             <div>
-                <Button onClick={this.handleClickOpen}>Show Details<DetailIcon /></Button>
+                <Button onClick={this.handleClickOpen}><DetailIcon /></Button>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}

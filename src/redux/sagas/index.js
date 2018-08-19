@@ -8,6 +8,7 @@ export default function* rootSaga() {
   yield takeEvery('FETCH_SERVICES', fetchServices)
   yield takeEvery('FETCH_CUSTOMERS', fetchCustomers)
   yield takeEvery('ADD_SERVICES', addServices)
+  yield takeEvery('DELETE_SERVICE', deleteService)
   yield takeEvery('POST_CUSTOMER', postCustomer)
   yield takeEvery('UPDATE_STATUS', updateStatus)
   yield all([
@@ -19,6 +20,13 @@ export default function* rootSaga() {
 function* addServices(action) {
   yield dispatch({
     type: 'NEW_SERVICES',
+    payload: action.payload
+  })
+}
+
+function* deleteService(action) {
+  yield dispatch({
+    type: 'REMOVE_SERVICE',
     payload: action.payload
   })
 }

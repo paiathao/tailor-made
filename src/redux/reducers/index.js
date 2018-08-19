@@ -40,6 +40,13 @@ const newCustomer = (state = defaultState, action) => {
         ...state,
         orderDetails: [...state.orderDetails, ...action.payload]
       }
+      case 'REMOVE_SERVICE':
+      console.log('reduc', action.payload)
+        const matchService = (service) => service._id !== action.payload._id;
+        return {
+          ...state,
+          orderDetails: state.orderDetails.filter(matchService)
+        }
     case 'ADD_CUSTOMER':
       return {
         ...state,
