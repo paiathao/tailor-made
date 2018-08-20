@@ -5,6 +5,9 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import NumberFormat from 'react-number-format';
 
+import ServiceSelector from '../ServiceSelector/ServiceSelector'
+import ServiceList from '../ServiceList/ServiceList'
+
 class EditForm extends Component {
     constructor(props) {
         super(props)
@@ -59,6 +62,10 @@ class EditForm extends Component {
                         onChange={this.handleChangeFor('phone')}
                         format="(###) ###-####"
                         mask="_" />
+                </div>
+                <div>
+                    <ServiceSelector />
+                    <ServiceList />
                 </div>
                 <div className="form-group">
                 </div>

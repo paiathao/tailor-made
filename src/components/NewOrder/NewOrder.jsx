@@ -40,7 +40,6 @@ class NewOrder extends Component {
 
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.props.dispatch({ type: 'FETCH_SERVICES' });
   }
 
   componentDidUpdate() {
@@ -166,7 +165,7 @@ class NewOrder extends Component {
             <ServiceSelector />
           </div>
           <div>
-            <ServiceList />
+            {/* <ServiceList /> */}
             <label>Payment Receive</label>
             <Checkbox
               onChange={this.updatePayment}

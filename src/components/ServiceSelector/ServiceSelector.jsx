@@ -7,6 +7,7 @@ import Slide from '@material-ui/core/Slide';
 import { Button } from 'reactstrap';
 
 import ServiceTable from '../ServiceTable/ServiceTable';
+import ServiceList from '../ServiceList/ServiceList'
 
 //styles for dialog
 const styles = {
@@ -29,12 +30,19 @@ class ServiceSelector extends Component {
         super(props)
         this.state = {
             open: false,
+            detail: false,
         };
+    }
+
+    componentDidMount() {
+        this.props.dispatch({ type: 'FETCH_SERVICES' });
     }
 
     //function for dialog
     handleClickOpen = () => {
-        this.setState({ open: true });
+        this.setState({
+            open: true,
+        });
     };
 
     handleClose = (selected) => {
@@ -43,12 +51,32 @@ class ServiceSelector extends Component {
             type: 'ADD_SERVICES',
             payload: selected,
         })
-        this.setState({ open: false });
+        this.setState({
+            open: false,
+            detail: true,
+        });
     };
 
     render() {
 
         const { classes } = this.props;
+
+        if (this.state.detail === true) {
+            return (
+                <div>
+                    <Button color="info" onClick={this.handleClickOpen} >Select Services</Button>
+                    <Dialog
+                        fullScreen
+                        open={this.state.open}
+                        onClose={this.handleClose}
+                        TransitionComponent={Transition}
+                    >
+                        <ServiceTable handleClose={this.handleClose} />
+                    </Dialog>
+                    <ServiceList />
+                </div>
+            )
+        }
 
 
         return (
