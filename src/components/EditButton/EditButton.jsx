@@ -14,6 +14,7 @@ class EditButton extends Component {
 
     state = {
         open: false,
+        editCustomer: []
     };
 
     handleClickOpen = () => {
@@ -44,7 +45,7 @@ class EditButton extends Component {
                 >
                     <DialogTitle id="form-dialog-title">Edit Customer's Information</DialogTitle>
                     <DialogContent>
-                        <EditForm customer={this.props.customer} />
+                        <EditForm customer={this.props.customer} editCustomer={this.state.editCustomer}/>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary">

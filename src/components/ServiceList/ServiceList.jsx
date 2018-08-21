@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ServiceTotal from '../ServiceTotal/ServiceTotal'
 
+//material u-i
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,9 +10,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@material-ui/core/Button';
 
 const mapStateToProps = state => ({
     services: state.newCustomer.orderDetails
@@ -60,7 +62,10 @@ class ServiceList extends Component {
                     <TableCell>{service.service} </TableCell>
                     <TableCell>{service.cost} </TableCell>
                     <TableCell>
-                        <button onClick={() => this.handleDelete(service)}>Remove</button>
+                        <Button color="secondary"
+                        onClick={() => this.handleDelete(service)}>
+                        <DeleteIcon/>
+                        </Button>
                     </TableCell>
                 </TableRow>
             )
@@ -78,7 +83,7 @@ class ServiceList extends Component {
                                 <TableCell>Category</TableCell>
                                 <TableCell>Service</TableCell>
                                 <TableCell>Cost</TableCell>
-                                <TableCell>Remove</TableCell>
+                                <TableCell>Delete</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

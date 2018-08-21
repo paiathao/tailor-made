@@ -15,6 +15,8 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import EditButton from '../EditButton/EditButton';
 
+import SweetAlert from 'react-bootstrap-sweetalert'
+
 //styles
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -54,16 +56,53 @@ class currentTable extends Component {
     this.state = {
       id: [],
       editItem: [],
+      alert: null,
+
     }
   }
 
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_CUSTOMERS' });
   }
+  
 
-  handleComplete = (id) => {
-    console.log('handle complete', id)
-    this.props.dispatch({ type: 'UPDATE_STATUS', payload: id });
+  showAlert = (id) => {
+    const getAlert = () => (
+      <SweetAlert
+      warning
+      showCancel
+      confirmBtnText="Yes, order is complete!"
+      confirmBtnBsStyle="danger"
+      cancelBtnBsStyle="default"
+      title="Are you sure?"
+      onConfirm={this.handleComplete}
+      onCancel={this.hideAlert}
+    >
+      Please confirm payment was also received!
+    </SweetAlert>
+    );
+
+    this.setState({
+      alert: getAlert(),
+      id: id
+    });
+  }
+
+  hideAlert = () => {
+    console.log('Hiding alert...');
+    this.setState({
+      alert: null,
+    });
+    
+    
+  }
+
+  handleComplete = () => {
+    console.log('complete', this.state.id)
+    this.props.dispatch({ type: 'UPDATE_STATUS', payload: this.state.id });
+    this.setState({
+      alert: null
+    });
   }
 
   render() {
@@ -103,11 +142,11 @@ class currentTable extends Component {
                     <CustomTableCell><Payment customer={customer} /></CustomTableCell>
                     <CustomTableCell>
                       <Checkbox
-                        onClick={() => this.handleComplete(customer._id)}
+                        onClick={() => this.showAlert(customer._id)}
                       />
                     </CustomTableCell>
                     <CustomTableCell>
-                      <EditButton customer={customer}/>
+                      <EditButton customer={customer} />
                     </CustomTableCell>
                   </TableRow>
                 );
@@ -115,6 +154,7 @@ class currentTable extends Component {
             })}
           </TableBody>
         </Table>
+        {this.state.alert}
       </Paper>
     );
   }

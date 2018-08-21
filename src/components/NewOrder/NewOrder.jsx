@@ -6,7 +6,6 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 //import others components
 import Nav from '../../components/Nav/Nav';
 import ServiceSelector from '../ServiceSelector/ServiceSelector';
-import ServiceList from '../ServiceList/ServiceList'
 
 //import for styling
 import DatePicker from 'react-datepicker';
@@ -165,7 +164,6 @@ class NewOrder extends Component {
             <ServiceSelector />
           </div>
           <div>
-            {/* <ServiceList /> */}
             <label>Payment Receive</label>
             <Checkbox
               onChange={this.updatePayment}
