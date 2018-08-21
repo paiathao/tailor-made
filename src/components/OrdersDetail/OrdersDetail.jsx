@@ -28,9 +28,9 @@ class OrdersDetail extends React.Component {
 
         let itemArray = this.item.map((item, index) => {
             return (
-                <p key={index}>
-                    Category: {item.category}, Service: {item.service} Cost: {item.cost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} 
-                </p>
+                <li key={index}>
+                    Category: {item.category} Service: {item.service} Cost: {item.cost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} 
+                </li>
             )
         })
 
@@ -47,9 +47,11 @@ class OrdersDetail extends React.Component {
                 >
                     <DialogTitle id="alert-dialog-title">{"Services Information"}</DialogTitle>
                     <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
+                        {/* <DialogContentText id="alert-dialog-description"> */}
+                            <ul>
                             {itemArray}
-                        </DialogContentText>
+                            </ul>
+                        {/* </DialogContentText> */}
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary" autoFocus>

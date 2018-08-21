@@ -10,6 +10,7 @@ export default function* rootSaga() {
   yield takeEvery('ADD_SERVICES', addServices)
   yield takeEvery('DELETE_SERVICE', deleteService)
   yield takeEvery('POST_CUSTOMER', postCustomer)
+  yield takeEvery('UPDATE_CUSTOMER', updateCustomer)
   yield takeEvery('UPDATE_STATUS', updateStatus)
   yield all([
     userSaga(),
@@ -64,9 +65,21 @@ function* postCustomer(action) {
   }
 }
 
+function* updateCustomer(action) {
+  try{
+    console.log('saga', action.payload)
+    yield call(axios.put, `/api/customer`, action.payload)
+    yield dispatch({
+      type: 'FETCH_CUSTOMERS'
+    })
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 function* updateStatus (action) {
   try{
-    console.log('got to saga')
     yield call(axios.put, `/api/customer/${action.payload}`)
     yield dispatch({
       type: 'FETCH_CUSTOMERS'

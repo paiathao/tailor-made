@@ -43,7 +43,39 @@ router.put('/:id', function (req, res) {
     Customer.findByIdAndUpdate({
       _id: req.params.id
     }, {
-        $set: { complete: true }
+        $set: { 
+          complete: true,
+          payment: true }
+      }).then(function (response) {
+        res.sendStatus(200);
+      }).catch((err) => {
+        console.log(err);
+        res.sendStatus(500)
+      })
+  } else {
+    res.sendStatus(403);
+  }
+});
+
+//put request to object customer
+router.put('/', function (req, res) {
+  console.log('got to put', req.body)
+  if (req.isAuthenticated) {
+    console.log('Got to PUT');
+    // update Database
+    Customer.findByIdAndUpdate({
+      _id: req.body._id
+    }, {
+        $set: { 
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            phone: req.body.phone,
+            orderNumber: req.body.orderNumber,
+            orderDetails: req.body.orderDetails,
+            dropDate: req.body.dropDate,
+            pickUp: req.body.pickUp,
+            paid: req.body.paid,
+            complete: req.body.complete}
       }).then(function (response) {
         res.sendStatus(200);
       }).catch((err) => {

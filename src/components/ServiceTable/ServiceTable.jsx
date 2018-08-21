@@ -5,12 +5,16 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import { connect } from 'react-redux';
 
-import EnhancedTableHead from '../EnhancedTableHead/EnhancedTableHead'
-import EnhancedTableToolbar from '../EnhancedTableToolbar/EnhancedTableToolbar'
+import EnhancedTableHead from '../EnhancedTableHead/EnhancedTableHead';
+import EnhancedTableToolbar from '../EnhancedTableToolbar/EnhancedTableToolbar';
+
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 const styles = theme => ({
   root: {
@@ -23,6 +27,14 @@ const styles = theme => ({
   tableWrapper: {
     overflowX: 'auto',
   },
+  button: {
+    display: 'block',
+    marginTop: theme.spacing.unit * 2,
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 150,
+  },
 });
 
 class ServiceTable extends React.Component {
@@ -31,6 +43,8 @@ class ServiceTable extends React.Component {
     selected: [],
     page: 0,
     rowsPerPage: 10,
+    query: '',
+    columnToQuery: 'Category',
   };
 
   handleSelectAllClick = (event, checked) => {
@@ -79,7 +93,21 @@ class ServiceTable extends React.Component {
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
     return (
-      <Paper className={classes.root}>
+      <div>
+        <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="demo-controlled-open-select">Select a column</InputLabel>
+        <Select
+          value={this.state.columnToQuery}
+          onChange={(event, index, value) => this.setState({columnToQuery : value})}
+          inputProps={{
+            name: 'columnToQuery',
+            id: 'demo-controlled-open-select',
+          }}
+        >
+          <MenuItem value="category">Category</MenuItem>
+          <MenuItem value="service">Service</MenuItem>
+        </Select>
+        </FormControl>
         <EnhancedTableToolbar numSelected={selected.length}
           selected={this.state.selected}
           handleClose={this.props.handleClose} />
@@ -138,7 +166,7 @@ class ServiceTable extends React.Component {
           onChangePage={this.handleChangePage}
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
         />
-      </Paper>
+      </div>
     );
   }
 }
