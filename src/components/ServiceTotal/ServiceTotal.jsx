@@ -26,13 +26,16 @@ class ServiceTotal extends Component {
         this.totalCust = 0;
         array.forEach((value) => {
             this.sum += value.cost;
-            console.log('sum', this.sum)
             this.tax = (this.sum * 0.06);
             this.totalCost = (this.sum + this.tax);
         })
 
-        this.saveState();
-
+        if (array.length > 0) {
+            this.saveState();
+        } else {
+            this.totalCost = 0;
+        }
+        
         return (
             <div>
                 <p> Subtotal Cost: {this.sum.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} </p>

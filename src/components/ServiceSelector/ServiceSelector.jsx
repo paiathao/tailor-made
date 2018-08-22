@@ -1,25 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Slide from '@material-ui/core/Slide';
-import Button from '@material-ui/core/Button';
+import { Button } from 'reactstrap';
 
 import ServiceTable from '../ServiceTable/ServiceTable';
 import ServiceList from '../ServiceList/ServiceList'
-import ServiceTotal from '../ServiceTotal/ServiceTotal'
-
-//styles for dialog
-const styles = {
-    appBar: {
-        position: 'relative',
-    },
-    flex: {
-        flex: 1,
-    },
-};
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;
@@ -32,47 +19,68 @@ class ServiceSelector extends Component {
         super(props)
         this.state = {
             open: false,
+            detail: false,
         };
+    }
+
+    componentDidMount() {
+        this.props.dispatch({ type: 'FETCH_SERVICES' });
     }
 
     //function for dialog
     handleClickOpen = () => {
-        this.setState({ open: true });
+        this.setState({
+            open: true,
+        });
     };
 
-    handleClose = () => {
-        this.setState({ open: false });
+    handleClose = (selected) => {
+        console.log('close', selected)
+        this.props.dispatch({
+            type: 'ADD_SERVICES',
+            payload: selected,
+        })
+        this.setState({
+            open: false,
+            detail: true,
+        });
     };
 
     render() {
 
-        const { classes } = this.props;
+        if (this.state.detail === true) {
+            return (
+                <div>
+                    <Button color="info" onClick={this.handleClickOpen} >Select Services</Button>
+                    <Dialog
+                        fullScreen
+                        open={this.state.open}
+                        onClose={this.handleClose}
+                        TransitionComponent={Transition}
+                    >
+                        <ServiceTable handleClose={this.handleClose} />
+                    </Dialog>
+                    <ServiceList />
+                </div>
+            )
+        }
 
 
         return (
             <div>
-            <Button onClick={this.handleClickOpen}>Select Services</Button>
-            <Dialog
-              fullScreen
-              open={this.state.open}
-              onClose={this.handleClose}
-              TransitionComponent={Transition}
-            >
-              <AppBar className={classes.appBar}>
-                <Toolbar>
-                  <Button color="inherit" onClick={this.handleClose}>
-                    Close
-                </Button>
-                </Toolbar>
-              </AppBar>
-              <ServiceTable />
-            </Dialog>
-            <ServiceList />
-            <ServiceTotal />
+                <Button color="info" onClick={this.handleClickOpen} >Select Services</Button>
+                <Dialog
+                    fullScreen
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    TransitionComponent={Transition}
+                >
+                    <ServiceTable handleClose={this.handleClose} />
+                </Dialog>
             </div>
         );
     }
 }
 
-export default withStyles(styles)(ServiceSelector);
+export default connect()(ServiceSelector);
 

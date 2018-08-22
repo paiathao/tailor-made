@@ -5,12 +5,19 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import { connect } from 'react-redux';
 
-import EnhancedTableHead from '../EnhancedTableHead/EnhancedTableHead'
-import EnhancedTableToolbar from '../EnhancedTableToolbar/EnhancedTableToolbar'
+import EnhancedTableHead from '../EnhancedTableHead/EnhancedTableHead';
+import EnhancedTableToolbar from '../EnhancedTableToolbar/EnhancedTableToolbar';
+
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
+
+import orderBy from 'lodash/orderBy';
 
 const styles = theme => ({
   root: {
@@ -23,6 +30,19 @@ const styles = theme => ({
   tableWrapper: {
     overflowX: 'auto',
   },
+  button: {
+    display: 'block',
+    marginTop: theme.spacing.unit * 2,
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 150,
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
 });
 
 class ServiceTable extends React.Component {
@@ -31,6 +51,8 @@ class ServiceTable extends React.Component {
     selected: [],
     page: 0,
     rowsPerPage: 10,
+    query: '',
+    columnToQuery: 'category',
   };
 
   handleSelectAllClick = (event, checked) => {
@@ -72,17 +94,54 @@ class ServiceTable extends React.Component {
 
   isSelected = row => this.state.selected.indexOf(row) !== -1;
 
+  //change for search
+  onChangeForSelect = (event) => {
+    this.setState({ columnToQuery: event.target.value });
+  }
+
+  handleChangeQuery = (event) => {
+    this.setState({ query: event.target.value });
+  }
+
   render() {
     const { classes } = this.props;
     const { selected, rowsPerPage, page } = this.state;
-    const data = this.props.serviceList
+    let lowerCaseQuery = this.state.query.toLowerCase()
+   
+    const data = orderBy(
+      this.state.query ? 
+      this.props.serviceList.filter( 
+        service => service[this.state.columnToQuery].toLowerCase().includes(lowerCaseQuery)
+        ) : this.props.serviceList
+    )
+
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
     return (
-      <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} selected={this.state.selected} />
+      <div>
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="demo-controlled-open-select">Select a column</InputLabel>
+          <Select
+            value={this.state.columnToQuery}
+            onChange={this.onChangeForSelect}
+          >
+            <MenuItem value="category">Category</MenuItem>
+            <MenuItem value="service">Service</MenuItem>
+          </Select>
+          <TextField
+            placeholder="Search"
+            className={classes.textField}
+            value={this.state.query}
+            onChange={this.handleChangeQuery}
+            margin="normal" />
+        </FormControl>
+        <EnhancedTableToolbar numSelected={selected.length}
+          selected={this.state.selected}
+          handleClose={this.props.handleClose} />
         <div className={classes.tableWrapper}>
-          <Table className={classes.table} aria-labelledby="tableTitle">
+          <Table
+            className={classes.table} aria-labelledby="tableTitle"
+          >
             <EnhancedTableHead
               numSelected={selected.length}
               onSelectAllClick={this.handleSelectAllClick}
@@ -91,7 +150,7 @@ class ServiceTable extends React.Component {
             <TableBody>
               {data
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((n, index) => {
+                .map(n => {
                   const isSelected = this.isSelected(n);
                   return (
                     <TableRow
@@ -100,7 +159,7 @@ class ServiceTable extends React.Component {
                       role="checkbox"
                       aria-checked={isSelected}
                       tabIndex={-1}
-                      key={index}
+                      key={n._id}
                       selected={isSelected}
                     >
                       <TableCell padding="checkbox">
@@ -136,7 +195,7 @@ class ServiceTable extends React.Component {
           onChangePage={this.handleChangePage}
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
         />
-      </Paper>
+      </div>
     );
   }
 }

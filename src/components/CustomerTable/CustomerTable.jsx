@@ -9,6 +9,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Edit from '@material-ui/icons/Edit'
 
 //styles
 const CustomTableCell = withStyles(theme => ({
@@ -77,16 +79,22 @@ class CustomerTable extends Component {
           </TableHead>
           <TableBody>
             {this.props.customerList.map((customer, index) => {
-                return (
-                  <TableRow className={classes.row} key={index}>
-                    <CustomTableCell component="th" scope="row">
-                    {customer.firstName} 
-                    </CustomTableCell>
-                    <CustomTableCell>{customer.lastName}</CustomTableCell>
-                    <CustomTableCell>{customer.phone}</CustomTableCell>
-                    <CustomTableCell numeric><button>Edit</button></CustomTableCell>
-                  </TableRow>
-                );
+              return (
+                <TableRow className={classes.row} key={index}>
+                  <CustomTableCell component="th" scope="row">
+                    {customer.firstName}
+                  </CustomTableCell>
+                  <CustomTableCell>{customer.lastName}</CustomTableCell>
+                  <CustomTableCell>{customer.phone}</CustomTableCell>
+                  <CustomTableCell>
+                    <Button color="secondary" aria-label="Edit" className={classes.button}
+                      onClick={() => this.handleEdit(customer)}
+                    >
+                      <Edit />
+                    </Button>
+                  </CustomTableCell>
+                </TableRow>
+              );
             })}
           </TableBody>
         </Table>
