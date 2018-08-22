@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import Slide from '@material-ui/core/Slide';
 import { Button } from 'reactstrap';
 
 import ServiceTable from '../ServiceTable/ServiceTable';
 import ServiceList from '../ServiceList/ServiceList'
-
-//styles for dialog
-const styles = {
-    appBar: {
-        position: 'relative',
-    },
-    flex: {
-        flex: 1,
-    },
-};
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;
@@ -59,8 +48,6 @@ class ServiceSelector extends Component {
 
     render() {
 
-        const { classes } = this.props;
-
         if (this.state.detail === true) {
             return (
                 <div>
@@ -95,7 +82,5 @@ class ServiceSelector extends Component {
     }
 }
 
-const ServiceSelectorStyles = withStyles(styles)(ServiceSelector);
-
-export default connect()(ServiceSelectorStyles);
+export default connect()(ServiceSelector);
 

@@ -168,7 +168,6 @@ class currentTable extends Component {
                       <Checkbox
                       checked={isSelected}
                       onClick={event => this.handleClick(event, customer)}
-                        // onClick={() => this.showAlert(customer._id)}
                       />
                     </CustomTableCell>
                     <CustomTableCell>
