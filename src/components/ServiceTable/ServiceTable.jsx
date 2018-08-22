@@ -15,6 +15,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   root: {
@@ -35,17 +36,50 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     minWidth: 150,
   },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
 });
+
+function desc(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
+
+function getSorting(order, orderBy) {
+  return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
+}
 
 class ServiceTable extends React.Component {
 
   state = {
+    order: 'asc',
+    orderBy: 'category',
     selected: [],
     page: 0,
     rowsPerPage: 10,
     query: '',
     columnToQuery: 'Category',
   };
+
+  handleRequestSort = (event, property) => {
+    const orderBy = property;
+    let order = 'desc';
+
+    if (this.state.orderBy === property && this.state.order === 'desc') {
+      order = 'asc';
+    }
+
+    this.setState({ order, orderBy });
+  };
+
 
   handleSelectAllClick = (event, checked) => {
     if (checked) {
@@ -86,11 +120,20 @@ class ServiceTable extends React.Component {
 
   isSelected = row => this.state.selected.indexOf(row) !== -1;
 
+  onChangeForSelect = (event) => {
+    this.setState({ columnToQuery: event.target.value });
+  }
+
+  handleChangeQuery = (event) => {
+    this.setState({ query: event.target.value });
+  }
+
   render() {
     const { classes } = this.props;
-    const { selected, rowsPerPage, page } = this.state;
+    const { order, orderBy, selected, rowsPerPage, page } = this.state;
     const data = this.props.serviceList
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+    // const lowerCaseQuery = this.state.query.lowerCase()
 
     return (
       <div>
@@ -98,28 +141,36 @@ class ServiceTable extends React.Component {
         <InputLabel htmlFor="demo-controlled-open-select">Select a column</InputLabel>
         <Select
           value={this.state.columnToQuery}
-          onChange={(event, index, value) => this.setState({columnToQuery : value})}
-          inputProps={{
-            name: 'columnToQuery',
-            id: 'demo-controlled-open-select',
-          }}
+          onChange={this.onChangeForSelect}
         >
           <MenuItem value="category">Category</MenuItem>
           <MenuItem value="service">Service</MenuItem>
         </Select>
+        <TextField
+                placeholder="Search"
+                 className={classes.textField}
+                 value={this.state.query}
+                 onChange={this.handleChangeQuery}
+                 margin="normal"/>
         </FormControl>
         <EnhancedTableToolbar numSelected={selected.length}
           selected={this.state.selected}
           handleClose={this.props.handleClose} />
         <div className={classes.tableWrapper}>
-          <Table className={classes.table} aria-labelledby="tableTitle">
+          <Table 
+          className={classes.table} aria-labelledby="tableTitle"
+          >
             <EnhancedTableHead
               numSelected={selected.length}
               onSelectAllClick={this.handleSelectAllClick}
               rowCount={data.length}
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={this.handleRequestSort}
             />
             <TableBody>
               {data
+                .sort(getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((n, index) => {
                   const isSelected = this.isSelected(n);

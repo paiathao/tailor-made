@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DetailIcon from '@material-ui/icons/DetailsSharp';
 
@@ -29,7 +28,7 @@ class OrdersDetail extends React.Component {
         let itemArray = this.item.map((item, index) => {
             return (
                 <li key={index}>
-                    Category: {item.category} Service: {item.service} Cost: {item.cost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} 
+                    Category: {item.category} Service: {item.service} Cost: {item.cost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                 </li>
             )
         })
@@ -47,11 +46,9 @@ class OrdersDetail extends React.Component {
                 >
                     <DialogTitle id="alert-dialog-title">{"Services Information"}</DialogTitle>
                     <DialogContent>
-                        {/* <DialogContentText id="alert-dialog-description"> */}
-                            <ul>
+                        <ul>
                             {itemArray}
-                            </ul>
-                        {/* </DialogContentText> */}
+                        </ul>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary" autoFocus>

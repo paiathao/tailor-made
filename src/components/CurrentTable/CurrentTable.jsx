@@ -57,6 +57,7 @@ class currentTable extends Component {
       id: [],
       editItem: [],
       alert: null,
+      selected: [],
 
     }
   }
@@ -64,9 +65,8 @@ class currentTable extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_CUSTOMERS' });
   }
-  
 
-  showAlert = (id) => {
+  handleClick = (event, row) => {
     const getAlert = () => (
       <SweetAlert
       warning
@@ -80,19 +80,41 @@ class currentTable extends Component {
     >
       Please confirm payment was also received!
     </SweetAlert>
-    );
+    )
+    const { selected } = this.state;
+    const selectedIndex = selected.indexOf(row);
+    let newSelected = [];
 
-    this.setState({
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, row);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1),
+      );
+    }
+
+    let selectId = newSelected[0]._id
+
+    this.setState({ 
+      selected: newSelected,
+      id: selectId,
       alert: getAlert(),
-      id: id
-    });
-  }
+     });
+  };
+  
+  isSelected = row => this.state.selected.indexOf(row) !== -1;
 
   hideAlert = () => {
     console.log('Hiding alert...');
     
     this.setState({
       alert: null,
+      selected: '',
     });
     
     
@@ -128,6 +150,7 @@ class currentTable extends Component {
           </TableHead>
           <TableBody>
             {this.props.customerList.map((customer, index) => {
+              const isSelected = this.isSelected(customer);
               if (customer.complete === false) {
                 return (
                   <TableRow className={classes.row} key={index}>
@@ -143,7 +166,9 @@ class currentTable extends Component {
                     <CustomTableCell><Payment customer={customer} /></CustomTableCell>
                     <CustomTableCell>
                       <Checkbox
-                        onClick={() => this.showAlert(customer._id)}
+                      checked={isSelected}
+                      onClick={event => this.handleClick(event, customer)}
+                        // onClick={() => this.showAlert(customer._id)}
                       />
                     </CustomTableCell>
                     <CustomTableCell>
