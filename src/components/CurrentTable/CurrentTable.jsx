@@ -115,8 +115,6 @@ class currentTable extends Component {
       alert: null,
       selected: '',
     });
-    
-    
   }
 
   handleComplete = () => {

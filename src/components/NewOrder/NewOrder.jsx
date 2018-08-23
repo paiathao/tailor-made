@@ -13,7 +13,8 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import Checkbox from '@material-ui/core/Checkbox';
 import NumberFormat from 'react-number-format';
-import Button from '@material-ui/core/Button'
+import { Button } from 'reactstrap';
+import SweetAlert from 'react-bootstrap-sweetalert'
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -33,6 +34,7 @@ class NewOrder extends Component {
         paid: false,
         complete: false
       },
+      alert: null,
     };
   }
 
@@ -95,13 +97,25 @@ class NewOrder extends Component {
 
   }
 
+  handleClick = (event, row) => {
+    const getAlert = () => (
+      <SweetAlert success title="Success!" onConfirm={this.handleSubmit}>
+        New order has been added!
+      </SweetAlert>
+    )
+
+    this.setState({
+      alert: getAlert(),
+    });
+  };
+
   handleSubmit = () => {
     console.log(this.state.newCustomer)
     this.props.dispatch({
       type: 'ADD_CUSTOMER',
       payload: this.state.newCustomer
     })
-    this.props.history.push('/success')
+    this.props.history.push('/currentOrders')
   }
 
   render() {
@@ -110,66 +124,56 @@ class NewOrder extends Component {
     if (this.props.user.userName) {
       content = (
         <div className="main">
-        <form className="newOrder">
-          <div className="form-group">
-            <label>First Name</label>
-            <input className="form-control" type="text" placeholder="First Name"
-              value={this.state.newCustomer.firstName}
-              onChange={this.handleChangeFor('firstName')}
-            />
-          </div>
-          <div className="form-group">
-            <label>Last Name</label>
-            <input className="form-control" type="text" placeholder="Last Name"
-              value={this.state.newCustomer.lastName}
-              onChange={this.handleChangeFor('lastName')}
-            />
-          </div>
-          <div className="form-group">
-            <label>Phone</label>
-            <NumberFormat className="form-control"
-              placeholder="Phone"
-              value={this.state.newCustomer.phone}
-              onChange={this.handleChangeFor('phone')}
-              format="(###) ###-####"
-              mask="_" />
-          </div>
-          <div className="form-group">
-            <label>Order #</label>
-            <input className="form-control" type="number" placeholder="Order #"
-              value={this.state.newCustomer.orderNumber}
-              onChange={this.handleChangeFor('orderNumber')}
-            />
-          </div>
-          <div className="form-group">
-            <label>Drop-off Date</label>
-            <DatePicker
-              selected={this.state.newCustomer.dropDate}
-              onChange={this.handleChangeForDropOff}
-            />
-          </div>
-          <div className="form-group">
-            <label>Pick-up Date & Time</label>
-            <DatePicker
-              selected={this.state.newCustomer.pickUp}
-              onChange={this.handleChangeForPickUp}
-              showTimeSelect
-              timeIntervals={60}
-              minTime={moment().hours(10).minutes(0)}
-              maxTime={moment().hours(20).minutes(0)}
-              dateFormat="LLL" />
-          </div>
-          <div className="form-group">
-            <ServiceSelector />
-          </div>
-          <div>
-            <label>Payment Receive</label>
-            <Checkbox
-              onChange={this.updatePayment}
-            />
-          </div>
-          <Button onClick={this.handleSubmit} variant="contained" color="primary">Submit</Button>
-        </form>
+          <form className="newOrder">
+            <div className="form-group">
+              <label>First Name</label>
+              <input className="form-control" type="text"
+                value={this.state.newCustomer.firstName}
+                onChange={this.handleChangeFor('firstName')}
+              />
+              <label>Last Name</label>
+              <input className="form-control" type="text"
+                value={this.state.newCustomer.lastName}
+                onChange={this.handleChangeFor('lastName')}
+              />
+              <label>Phone</label>
+              <NumberFormat className="form-control"
+                value={this.state.newCustomer.phone}
+                onChange={this.handleChangeFor('phone')}
+                format="(###) ###-####"
+                mask="_" />
+              <label>Order #</label>
+              <input className="form-control" type="number"
+                value={this.state.newCustomer.orderNumber}
+                onChange={this.handleChangeFor('orderNumber')}
+              />
+              <label>Drop-off Date</label>
+              <DatePicker
+                className="form-control"
+                selected={this.state.newCustomer.dropDate}
+                onChange={this.handleChangeForDropOff}
+              />
+              <label>Pick-up Date & Time</label>
+              <DatePicker
+                className="form-control"
+                selected={this.state.newCustomer.pickUp}
+                onChange={this.handleChangeForPickUp}
+                showTimeSelect
+                timeIntervals={60}
+                minTime={moment().hours(10).minutes(0)}
+                maxTime={moment().hours(20).minutes(0)}
+                dateFormat="LLL" />
+            </div>
+            <div>
+              <ServiceSelector />
+              <label>Payment Receive</label>
+              <Checkbox
+                onChange={this.updatePayment}
+              />
+              <Button onClick={this.handleClick} variant="contained" color="info">Submit</Button>
+            </div>
+          </form>
+          {this.state.alert}
         </div>
       );
     }

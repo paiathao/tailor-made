@@ -50,7 +50,7 @@ class ServiceSelector extends Component {
         if (this.state.detail === true) {
             return (
                 <div>
-                    <Button color="info" onClick={this.handleClickOpen} >Select Services</Button>
+                    <Button color="secondary" onClick={this.handleClickOpen} >Select Services</Button>
                     <Dialog
                         fullScreen
                         open={this.state.open}
@@ -69,7 +69,7 @@ class ServiceSelector extends Component {
 
         return (
             <div>
-                <Button color="info" onClick={this.handleClickOpen} >Select Services</Button>
+                <Button color="secondary" onClick={this.handleClickOpen} >Select Services</Button>
                 <Dialog
                     fullScreen
                     open={this.state.open}

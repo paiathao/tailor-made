@@ -15,7 +15,6 @@ import CurrentOrders from './components/CurrentOrders/CurrentOrders';
 import CompleteOrders from './components/CompleteOrders/CompleteOrders';
 import CustomersBoard from './components/CustomersBoard/CustomersBoard';
 import BusinessReports from './components/BusinessReports/BusinessReports';
-import Success from './components/Success/Success'
 
 import './styles/main.css';
 
@@ -40,10 +39,6 @@ const App = () => (
         <Route
           path="/newOrder"
           component={NewOrder}
-        />
-        <Route
-          path="/success"
-          component={Success}
         />
         <Route
           path="/currentOrders"

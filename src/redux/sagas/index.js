@@ -57,6 +57,7 @@ function* fetchCustomers() {
 } 
 
 function* postCustomer(action) {
+
   try{
     yield call(axios.post, '/api/customer', action.payload)
 
