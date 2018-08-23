@@ -26,7 +26,7 @@ class CustomersBoard extends Component {
 
     if (this.props.user.userName) {
       content = (
-        <div>
+        <div className="main">
           <CustomerTable/>
         </div>
       );

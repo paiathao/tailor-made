@@ -1,9 +1,10 @@
 import React from 'react';
 
 const Header = ({ title }) => (
-  <div className="instructions">
+  <div className="header">
     <div>
-      <h1 className="lead">{ title }</h1>
+    <img src={require('/Users/paiathao/prime/Solo Project/tailor-made/src/images/header5.png')} />
+    
     </div>
   </div>
 );

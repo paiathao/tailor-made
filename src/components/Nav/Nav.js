@@ -47,12 +47,15 @@ class Nav extends Component {
                 Business Reports
           </Link>
             </li>
+            <li>
+              <a
+                onClick={this.logout}
+              >
+                Log Out
+              </a>
+            </li>
           </ul>
-          <button
-            onClick={this.logout}
-          >
-            Log Out
-          </button>
+
         </div>
       </div>
     );

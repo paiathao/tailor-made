@@ -1,17 +1,61 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    background-color: #f9f9f9;
 }
 
-.instructions h1 {
+.header h1 {
     font-size: 24px;
     font-weight: 700;
 }
 
-.instructions {
-    background-color: #00acb0;
-    padding: 5px;
+.header {
+    background-color: #BAC4BE;
+    height: 280px;
+    width: 90%;
+    margin-top: 15px;
+    margin-left: 5%;
     color: #ece7e7;
 }
+
+.navbar {
+    background-color: #fff;
+    width: 90%;
+    margin-top: 5px;
+    margin-left: 5%;
+    border-radius: 0px;
+    color: #a8b3ad;
+    height: 50px;
+    text-decoration: none;
+  }
+
+a,
+a:link,
+a:visited {
+    color: #aaa;
+    text-decoration: none;
+    -webkit-transition: color .5s ease-out;
+       -moz-transition: color .5s ease-out;
+         -o-transition: color .5s ease-out;
+            transition: color .5s ease-out;
+}
+
+
+a:hover {
+    color: #555;
+    text-decoration: none;
+}
+
+.serviceList {
+    padding-top: 15px;
+    color: #818298;
+}
+
+.serviceCalc {
+    padding-left: 24px;
+    padding-top: 10px;
+}
+
 
 /* form {
     background-color: #dbd5d5;
@@ -21,6 +65,14 @@ body {
     padding: 25px;
     border-radius: 2px;
 } */
+
+.main {
+    width: 90%;
+    margin-top: 5px;
+    margin-left: 5%;
+    background-color: #e9eeef;
+    color: #818298;
+}
 
 .newOrder{
     padding: 50px;
@@ -52,12 +104,6 @@ input[type="submit"] {
     background-color: #f8f8f8;
 }
 
-.navbar {
-  background-color: #00acb0;
-  width: 100%;
-  border-radius: 0px;
-}
-
 ul {
     list-style-type: none;
     margin: 0;
@@ -83,3 +129,5 @@ li a:hover {
     text-decoration: underline;
     color: #eee;
 }
+
+

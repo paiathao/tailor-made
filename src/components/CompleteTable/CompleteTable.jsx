@@ -14,11 +14,12 @@ import Paper from '@material-ui/core/Paper';
 //styles
 const CustomTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: '#ffa782',
     color: theme.palette.common.white,
   },
   body: {
     fontSize: 14,
+    color: '#818298'
   },
 }))(TableCell);
 

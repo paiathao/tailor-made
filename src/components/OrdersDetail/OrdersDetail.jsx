@@ -7,6 +7,11 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DetailIcon from '@material-ui/icons/DetailsSharp';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 class OrdersDetail extends React.Component {
     state = {
@@ -27,9 +32,11 @@ class OrdersDetail extends React.Component {
 
         let itemArray = this.item.map((item, index) => {
             return (
-                <li key={index}>
-                    Category: {item.category} Service: {item.service} Cost: {item.cost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-                </li>
+                <tr key={index}>
+                    <TableCell>{item.category} </TableCell>
+                    <TableCell> {item.service} </TableCell>
+                    <TableCell> {item.cost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} </TableCell>
+                </tr>
             )
         })
 
@@ -37,7 +44,7 @@ class OrdersDetail extends React.Component {
 
         return (
             <div>
-                <Button onClick={this.handleClickOpen}>Show Details<DetailIcon /></Button>
+                <Button onClick={this.handleClickOpen}>Details<DetailIcon /></Button>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -46,9 +53,18 @@ class OrdersDetail extends React.Component {
                 >
                     <DialogTitle id="alert-dialog-title">{"Services Information"}</DialogTitle>
                     <DialogContent>
-                        <ul>
-                            {itemArray}
-                        </ul>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Category</TableCell>
+                                    <TableCell>Service</TableCell>
+                                    <TableCell>Cost</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {itemArray}
+                            </TableBody>
+                        </Table>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary" autoFocus>

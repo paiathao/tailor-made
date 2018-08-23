@@ -41,13 +41,14 @@ const toolbarStyles = theme => ({
     },
     title: {
       flex: '0 0 auto',
+      paddingLeft: '24px',
+      paddingTop: '10px',
     },
   });
 
 class ServiceList extends Component {
 
     handleDelete = (service) => {
-        console.log('delete', service)
         this.props.dispatch({ type: 'DELETE_SERVICE', payload: service });
     }
 
@@ -60,7 +61,7 @@ class ServiceList extends Component {
                 <TableRow key={index}>
                     <TableCell> {service.category} </TableCell>
                     <TableCell>{service.service} </TableCell>
-                    <TableCell>{service.cost} </TableCell>
+                    <TableCell>{parseFloat(service.cost).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</TableCell>
                     <TableCell>
                         <Button color="secondary"
                         onClick={() => this.handleDelete(service)}>

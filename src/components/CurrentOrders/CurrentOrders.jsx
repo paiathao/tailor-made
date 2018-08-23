@@ -8,12 +8,15 @@ import CurrentTable from '../CurrentTable/CurrentTable'
 
 const mapStateToProps = state => ({
   user: state.user,
+  newCustomer: state.newCustomer
 });
 
 
 class CurrentOrders extends Component {
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+    this.props.dispatch({type: 'POST_CUSTOMER', payload: this.props.newCustomer})
+    this.props.dispatch({type: 'RESET_CUSTOMER'})
   }
 
   componentDidUpdate() {
@@ -28,7 +31,7 @@ class CurrentOrders extends Component {
 
     if (this.props.user.userName) {
       content = (
-        <div>
+        <div className="main">
          <CurrentTable/>
         </div>
       );

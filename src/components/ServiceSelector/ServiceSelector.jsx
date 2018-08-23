@@ -35,7 +35,6 @@ class ServiceSelector extends Component {
     };
 
     handleClose = (selected) => {
-        console.log('close', selected)
         this.props.dispatch({
             type: 'ADD_SERVICES',
             payload: selected,
@@ -51,7 +50,7 @@ class ServiceSelector extends Component {
         if (this.state.detail === true) {
             return (
                 <div>
-                    <Button color="info" onClick={this.handleClickOpen} >Select Services</Button>
+                    <Button color="secondary" onClick={this.handleClickOpen} >Select Services</Button>
                     <Dialog
                         fullScreen
                         open={this.state.open}
@@ -60,7 +59,9 @@ class ServiceSelector extends Component {
                     >
                         <ServiceTable handleClose={this.handleClose} />
                     </Dialog>
+                    <div className="serviceList">
                     <ServiceList />
+                    </div>
                 </div>
             )
         }
@@ -68,7 +69,7 @@ class ServiceSelector extends Component {
 
         return (
             <div>
-                <Button color="info" onClick={this.handleClickOpen} >Select Services</Button>
+                <Button color="secondary" onClick={this.handleClickOpen} >Select Services</Button>
                 <Dialog
                     fullScreen
                     open={this.state.open}
