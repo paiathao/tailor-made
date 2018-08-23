@@ -41,13 +41,14 @@ const toolbarStyles = theme => ({
     },
     title: {
       flex: '0 0 auto',
+      paddingLeft: '24px',
+      paddingTop: '10px'
     },
   });
 
 class ServiceList extends Component {
 
     handleDelete = (service) => {
-        console.log('delete', service)
         this.props.dispatch({ type: 'DELETE_SERVICE', payload: service });
     }
 

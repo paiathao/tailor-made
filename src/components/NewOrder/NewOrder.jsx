@@ -33,7 +33,6 @@ class NewOrder extends Component {
         paid: false,
         complete: false
       },
-      alert: null,
     };
   }
 
@@ -110,7 +109,7 @@ class NewOrder extends Component {
 
     if (this.props.user.userName) {
       content = (
-
+        <div className="main">
         <form className="newOrder">
           <div className="form-group">
             <label>First Name</label>
@@ -169,8 +168,9 @@ class NewOrder extends Component {
               onChange={this.updatePayment}
             />
           </div>
-          <Button onClick={this.handleSubmit} class="btn btn-primary">Submit</Button>
+          <Button onClick={this.handleSubmit} variant="contained" color="primary">Submit</Button>
         </form>
+        </div>
       );
     }
 

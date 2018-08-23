@@ -30,7 +30,7 @@ class DashBoard extends Component {
 
     if (this.props.user.userName) {
       content = (
-        <div>
+        <div className="main">
           <h1
             id="welcome"
           >

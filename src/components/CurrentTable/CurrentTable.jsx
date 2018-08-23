@@ -20,11 +20,12 @@ import SweetAlert from 'react-bootstrap-sweetalert'
 //styles
 const CustomTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: '#ffa782',
     color: theme.palette.common.white,
   },
   body: {
     fontSize: 14,
+    color: '#818298'
   },
 }))(TableCell);
 
@@ -35,7 +36,7 @@ const styles = theme => ({
     overflowX: 'auto',
   },
   table: {
-    minWidth: 700,
+    maxWidth: 700,
   },
   row: {
     '&:nth-of-type(odd)': {
@@ -110,8 +111,6 @@ class currentTable extends Component {
   isSelected = row => this.state.selected.indexOf(row) !== -1;
 
   hideAlert = () => {
-    console.log('Hiding alert...');
-    
     this.setState({
       alert: null,
       selected: '',
@@ -121,7 +120,6 @@ class currentTable extends Component {
   }
 
   handleComplete = () => {
-    console.log('complete', this.state.id)
     this.props.dispatch({ type: 'UPDATE_STATUS', payload: this.state.id });
     this.setState({
       alert: null

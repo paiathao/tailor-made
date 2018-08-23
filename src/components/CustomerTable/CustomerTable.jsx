@@ -15,11 +15,12 @@ import Edit from '@material-ui/icons/Edit'
 //styles
 const CustomTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: '#ffa782',
     color: theme.palette.common.white,
   },
   body: {
     fontSize: 14,
+    color: '#818298'
   },
 }))(TableCell);
 
@@ -59,7 +60,6 @@ class CustomerTable extends Component {
   }
 
   handleComplete = (id) => {
-    console.log('handle complete', id)
     this.props.dispatch({ type: 'UPDATE_STATUS', payload: id });
   }
 

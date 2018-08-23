@@ -35,7 +35,6 @@ class ServiceSelector extends Component {
     };
 
     handleClose = (selected) => {
-        console.log('close', selected)
         this.props.dispatch({
             type: 'ADD_SERVICES',
             payload: selected,
@@ -60,7 +59,9 @@ class ServiceSelector extends Component {
                     >
                         <ServiceTable handleClose={this.handleClose} />
                     </Dialog>
+                    <div className="serviceList">
                     <ServiceList />
+                    </div>
                 </div>
             )
         }

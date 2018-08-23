@@ -37,7 +37,7 @@ class ServiceTotal extends Component {
         }
         
         return (
-            <div>
+            <div className="serviceCalc">
                 <p> Subtotal Cost: {this.sum.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} </p>
                 <p> Taxes: {this.tax.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} </p>
                 <p> Total Cost: {this.totalCost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} </p>
