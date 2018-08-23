@@ -23,27 +23,27 @@ class Nav extends Component {
           </Link>
             </li>
             <li>
-              <Link to="/newOrder">
+              <Link to="/neworder">
                 New Order
           </Link>
             </li>
             <li>
-              <Link to="/currentOrders">
+              <Link to="/currentorders">
                 Current Order
           </Link>
             </li>
             <li>
-              <Link to="/completeOrders">
+              <Link to="/completeorders">
                 Complete Order
           </Link>
             </li>
             <li>
-              <Link to="/customersBoard">
+              <Link to="/customersboard">
                 Customers
           </Link>
             </li>
             <li>
-              <Link to="/businessReports">
+              <Link to="/businessreports">
                 Business Reports
           </Link>
             </li>

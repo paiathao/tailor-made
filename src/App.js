@@ -37,11 +37,11 @@ const App = () => (
           component={DashBoard}
         />
         <Route
-          path="/newOrder"
+          path="/neworder"
           component={NewOrder}
         />
         <Route
-          path="/currentOrders"
+          path="/currentorders"
           component={CurrentOrders}
         />
         <Route
@@ -49,11 +49,11 @@ const App = () => (
           component={CompleteOrders}
         />
         <Route
-          path="/customersBoard"
+          path="/customersboard"
           component={CustomersBoard}
         />
         <Route
-          path="/businessReports"
+          path="/businessreports"
           component={BusinessReports}
         />
         {/* OTHERWISE (no path!) */}
