@@ -38,7 +38,6 @@ class EditButton extends Component {
     };
 
     handleSave = (customer) => {
-        console.log(customer)
         this.props.dispatch({
             type: 'UPDATE_CUSTOMER',
             payload: this.state.editCustomer
@@ -50,7 +49,6 @@ class EditButton extends Component {
 
     handleChangeFor = (propertyName) => {
         return (event) => {
-            console.log(event.target.value)
             this.setState({
                 editCustomer: {
                     ...this.state.editCustomer,

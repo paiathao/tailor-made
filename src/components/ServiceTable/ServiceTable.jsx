@@ -119,7 +119,8 @@ class ServiceTable extends React.Component {
 
     return (
       <div>
-        <FormControl className={classes.formControl}>
+        <FormControl className="wrapper">
+          <div>
           <InputLabel htmlFor="demo-controlled-open-select">Select a column</InputLabel>
           <Select
             value={this.state.columnToQuery}
@@ -134,6 +135,7 @@ class ServiceTable extends React.Component {
             value={this.state.query}
             onChange={this.handleChangeQuery}
             margin="normal" />
+          </div>
         </FormControl>
         <EnhancedTableToolbar numSelected={selected.length}
           selected={this.state.selected}

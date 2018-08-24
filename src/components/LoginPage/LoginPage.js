@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
+import { Button } from 'reactstrap';
+
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -90,11 +92,13 @@ class LoginPage extends Component {
             </label>
           </div>
           <div>
-            <input
+            <Button color="secondary" 
               type="submit"
               name="submit"
               value="Log In"
-            />
+              >
+              Log In
+            </Button>
             <Link to="/register">Register</Link>
           </div>
         </form>

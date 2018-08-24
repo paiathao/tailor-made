@@ -11,8 +11,6 @@ class EditForm extends Component {
 
     render() {
 
-        console.log(this.props.customer)
-
         return (
             <form className="newOrder">
                 <div className="form-group">

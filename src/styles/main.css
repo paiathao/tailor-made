@@ -137,4 +137,15 @@ li a:hover {
     margin-left: 5%;
 }
 
+button:focus {
+    outline-color: #eee;
+}
 
+.wrapper {
+    text-align: center;
+    width: 100%;
+}
+
+.wrapper label {
+    position: initial;
+}

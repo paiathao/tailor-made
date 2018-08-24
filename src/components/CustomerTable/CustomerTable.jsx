@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import EditButton from '../EditButton/EditButton';
 
 //material-ui
 import { withStyles } from '@material-ui/core/styles';
@@ -9,8 +10,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Edit from '@material-ui/icons/Edit'
+
+import orderBy from 'lodash/orderBy';
 
 //styles
 const CustomTableCell = withStyles(theme => ({
@@ -51,7 +52,6 @@ class CustomerTable extends Component {
 
     this.state = {
       id: [],
-      editItem: [],
     }
   }
 
@@ -66,19 +66,21 @@ class CustomerTable extends Component {
   render() {
     const { classes } = this.props;
 
+    const data = orderBy(this.props.customerList, ['firstName'], ['asc'])
+
     return (
       <Paper className={classes.root}>
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <CustomTableCell>First Name</CustomTableCell>
+              <CustomTableCell >First Name</CustomTableCell>
               <CustomTableCell>Last Name</CustomTableCell>
               <CustomTableCell>Phone</CustomTableCell>
               <CustomTableCell>Edit</CustomTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.customerList.map((customer, index) => {
+            {data.map((customer, index) => {
               return (
                 <TableRow className={classes.row} key={index}>
                   <CustomTableCell component="th" scope="row">
@@ -87,11 +89,7 @@ class CustomerTable extends Component {
                   <CustomTableCell>{customer.lastName}</CustomTableCell>
                   <CustomTableCell>{customer.phone}</CustomTableCell>
                   <CustomTableCell>
-                    <Button color="secondary" aria-label="Edit" className={classes.button}
-                      onClick={() => this.handleEdit(customer)}
-                    >
-                      <Edit />
-                    </Button>
+                      <EditButton customer={customer}/>
                   </CustomTableCell>
                 </TableRow>
               );
