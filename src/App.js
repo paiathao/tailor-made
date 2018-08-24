@@ -15,6 +15,7 @@ import CurrentOrders from './components/CurrentOrders/CurrentOrders';
 import CompleteOrders from './components/CompleteOrders/CompleteOrders';
 import CustomersBoard from './components/CustomersBoard/CustomersBoard';
 import BusinessReports from './components/BusinessReports/BusinessReports';
+import Footer from './components/Footer/Footer'
 
 import './styles/main.css';
 
@@ -37,11 +38,11 @@ const App = () => (
           component={DashBoard}
         />
         <Route
-          path="/newOrder"
+          path="/neworder"
           component={NewOrder}
         />
         <Route
-          path="/currentOrders"
+          path="/currentorders"
           component={CurrentOrders}
         />
         <Route
@@ -49,11 +50,11 @@ const App = () => (
           component={CompleteOrders}
         />
         <Route
-          path="/customersBoard"
+          path="/customersboard"
           component={CustomersBoard}
         />
         <Route
-          path="/businessReports"
+          path="/businessreports"
           component={BusinessReports}
         />
         {/* OTHERWISE (no path!) */}
@@ -61,6 +62,7 @@ const App = () => (
 
       </Switch>
     </Router>
+    <Footer/>
   </div>
 );
 

@@ -130,4 +130,11 @@ li a:hover {
     color: #eee;
 }
 
+.footer {
+    background: #f9f9f9;
+    width: 90%;
+    height: 10px;
+    margin-left: 5%;
+}
+
 

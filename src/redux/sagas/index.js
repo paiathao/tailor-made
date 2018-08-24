@@ -60,6 +60,9 @@ function* postCustomer(action) {
 
   try{
     yield call(axios.post, '/api/customer', action.payload)
+    yield dispatch({
+      type: 'FETCH_CUSTOMERS'
+    })
 
   } catch (error) {
     console.log(error);

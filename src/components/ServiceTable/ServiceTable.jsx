@@ -1,4 +1,8 @@
 import React from 'react';
+import EnhancedTableHead from '../EnhancedTableHead/EnhancedTableHead';
+import EnhancedTableToolbar from '../EnhancedTableToolbar/EnhancedTableToolbar';
+
+//import material-ui
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,10 +11,6 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
 import { connect } from 'react-redux';
-
-import EnhancedTableHead from '../EnhancedTableHead/EnhancedTableHead';
-import EnhancedTableToolbar from '../EnhancedTableToolbar/EnhancedTableToolbar';
-
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';

@@ -14,6 +14,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
+import SweetAlert from 'react-bootstrap-sweetalert'
 
 const mapStateToProps = state => ({
     services: state.newCustomer.orderDetails
@@ -48,9 +49,50 @@ const toolbarStyles = theme => ({
 
 class ServiceList extends Component {
 
-    handleDelete = (service) => {
-        this.props.dispatch({ type: 'DELETE_SERVICE', payload: service });
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            alert: null,
+            service: [],
+        }
     }
+
+    handleClick = (service => {
+        console.log('click', service)
+        const getAlert = () => (
+          <SweetAlert
+          warning
+          showCancel
+          confirmBtnText="Delete"
+          confirmBtnBsStyle="danger"
+          cancelBtnBsStyle="default"
+          title="Are you sure?"
+          onConfirm={this.handleDelete}
+          onCancel={this.hideAlert}
+        >
+          Please confirm you would like to remove this service?
+        </SweetAlert>
+        )
+    
+        this.setState({ 
+          alert: getAlert(),
+          service: service
+         });
+      })
+
+    handleDelete = (service) => {
+        this.props.dispatch({ type: 'DELETE_SERVICE', payload: this.state.service });
+        this.setState({
+            alert: null,
+          });
+    }
+
+    hideAlert = () => {
+        this.setState({
+          alert: null,
+        });
+      }
 
     render() {
 
@@ -64,7 +106,8 @@ class ServiceList extends Component {
                     <TableCell>{parseFloat(service.cost).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</TableCell>
                     <TableCell>
                         <Button color="secondary"
-                        onClick={() => this.handleDelete(service)}>
+                        // onClick={() => this.handleDelete(service)}
+                        onClick={() => this.handleClick(service)}>
                         <DeleteIcon/>
                         </Button>
                     </TableCell>
@@ -93,6 +136,7 @@ class ServiceList extends Component {
                     </Table>
                     <ServiceTotal />
                 </Paper>
+                {this.state.alert}
             </div>
         );
     }

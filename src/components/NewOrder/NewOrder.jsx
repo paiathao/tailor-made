@@ -115,7 +115,7 @@ class NewOrder extends Component {
       type: 'ADD_CUSTOMER',
       payload: this.state.newCustomer
     })
-    this.props.history.push('/currentOrders')
+    this.props.history.push('/currentorders')
   }
 
   render() {
@@ -127,7 +127,9 @@ class NewOrder extends Component {
           <form className="newOrder">
             <div className="form-group">
               <label>First Name</label>
-              <input className="form-control" type="text"
+              <input 
+                className="form-control" 
+                type="text" 
                 value={this.state.newCustomer.firstName}
                 onChange={this.handleChangeFor('firstName')}
               />
@@ -170,7 +172,11 @@ class NewOrder extends Component {
               <Checkbox
                 onChange={this.updatePayment}
               />
-              <Button onClick={this.handleClick} variant="contained" color="info">Submit</Button>
+              <Button 
+                onClick={this.handleClick} 
+                variant="contained" 
+                color="info">Submit
+              </Button>
             </div>
           </form>
           {this.state.alert}
