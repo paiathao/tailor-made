@@ -13,7 +13,7 @@ class Payment extends Component {
         if (paid === true) {
             icon = <p><ThumbUp /> Yes</p>
         } else {
-            icon = <p><ThumbDown /> No</p>
+            icon = <p><ThumbDown style={{'color': '#fe4a30'}}/> No</p>
         }
 
         return (

@@ -15,6 +15,7 @@ import CurrentOrders from './components/CurrentOrders/CurrentOrders';
 import CompleteOrders from './components/CompleteOrders/CompleteOrders';
 import CustomersBoard from './components/CustomersBoard/CustomersBoard';
 import BusinessReports from './components/BusinessReports/BusinessReports';
+import Footer from './components/Footer/Footer'
 
 import './styles/main.css';
 
@@ -61,6 +62,7 @@ const App = () => (
 
       </Switch>
     </Router>
+    <Footer/>
   </div>
 );
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import OrdersDetail from '../OrdersDetail/OrdersDetail'
 import Payment from '../Payment/Payment'
-import moment from 'moment';
+import EditButton from '../EditButton/EditButton';
 
 //material-ui
 import { withStyles } from '@material-ui/core/styles';
@@ -13,9 +13,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
-import EditButton from '../EditButton/EditButton';
 
+import moment from 'moment';
 import SweetAlert from 'react-bootstrap-sweetalert'
+import orderBy from 'lodash/orderBy';
 
 //styles
 const CustomTableCell = withStyles(theme => ({
@@ -127,6 +128,8 @@ class currentTable extends Component {
   render() {
     const { classes } = this.props;
 
+    const data = orderBy(this.props.customerList, ['pickUp'], ['asc'])
+
     return (
       <Paper className={classes.root}>
         <Table className={classes.table}>
@@ -145,7 +148,7 @@ class currentTable extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.customerList.map((customer, index) => {
+            {data.map((customer, index) => {
               const isSelected = this.isSelected(customer);
               if (customer.complete === false) {
                 return (

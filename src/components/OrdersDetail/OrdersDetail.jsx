@@ -44,14 +44,14 @@ class OrdersDetail extends React.Component {
 
         return (
             <div>
-                <Button onClick={this.handleClickOpen}>Details<DetailIcon /></Button>
+                <Button onClick={this.handleClickOpen}>Details<DetailIcon style={{'color': '#ffa782'}}/></Button>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">{"Services Information"}</DialogTitle>
+                    <DialogTitle id="alert-dialog-title" >Services Information</DialogTitle>
                     <DialogContent>
                         <Table>
                             <TableHead>
