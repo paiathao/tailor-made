@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import NumberFormat from 'react-number-format';
 
-import ServiceSelector from '../ServiceSelector/ServiceSelector'
+// import ServiceSelector from '../ServiceSelector/ServiceSelector'
 
 class EditForm extends Component {
 
@@ -35,9 +35,9 @@ class EditForm extends Component {
                         format="(###) ###-####"
                         mask="_" />
                 </div>
-                <div>
+                {/* <div>
                     <ServiceSelector />
-                </div>
+                </div> */}
                 <div className="form-group">
                 </div>
             </form>

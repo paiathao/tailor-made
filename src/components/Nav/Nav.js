@@ -53,7 +53,7 @@ class Nav extends Component {
           </Link>
             </li>
             <li>
-              <a href=""
+              <a 
                 onClick={this.logout}
               >
                 Log Out

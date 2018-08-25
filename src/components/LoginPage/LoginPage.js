@@ -5,6 +5,9 @@ import { triggerLogin, formError, clearError } from '../../redux/actions/loginAc
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
 import { Button } from 'reactstrap';
+import UserIcon from '@material-ui/icons/AccountBoxOutlined'
+import Lock from '@material-ui/icons/HttpsOutlined'
+import Input from '@material-ui/core/Input';
 
 
 const mapStateToProps = state => ({
@@ -56,7 +59,7 @@ class LoginPage extends Component {
           className="alert"
           role="alert"
         >
-          { this.props.login.message }
+          {this.props.login.message}
         </h2>
       );
     }
@@ -65,41 +68,43 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div className="main">
-        { this.renderAlert() }
-        <form onSubmit={this.login}>
+      <div>
+        {this.renderAlert()}
+        <div className="topLine"></div>
+        <div className="secondLine"></div>
+        <form onSubmit={this.login} className="logging">
           <h1>Login</h1>
           <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
+            <UserIcon />
+            <Input
+              type="text"
+              placeholder="Username"
+              name="username"
+              value={this.state.username}
+              onChange={this.handleInputChangeFor('username')}
+            />
           </div>
           <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
+            <Lock />
+            <Input
+              placeholder="Password"
+              type="password"
+              name="password"
+              value={this.state.password}
+              onChange={this.handleInputChangeFor('password')}
+            />
           </div>
-          <div>
-            <Button color="secondary" 
+          <div className="thirdLine">
+            <Button color="secondary"
               type="submit"
               name="submit"
               value="Log In"
-              >
+            >
               Log In
             </Button>
-            <Link to="/register">Register</Link>
+            <span style={{ padding: '5px' }}>
+              <Link to="/register">Register</Link>
+            </span>
           </div>
         </form>
       </div>

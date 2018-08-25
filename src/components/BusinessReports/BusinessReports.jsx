@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
+var LineChart = require("react-chartjs").Line;
+
 const mapStateToProps = state => ({
   user: state.user,
 });
@@ -19,15 +21,14 @@ class BusinessReports extends Component {
     }
   }
 
+
   render() {
     let content = null;
 
     if (this.props.user.userName) {
       content = (
         <div className="main">
-          <p>
-          Business Reports
-          </p>
+        
         </div>
       );
     }
