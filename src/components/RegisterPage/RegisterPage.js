@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import { Button } from 'reactstrap';
+import UserIcon from '@material-ui/icons/AccountBoxOutlined'
+import Lock from '@material-ui/icons/HttpsOutlined'
+import Input from '@material-ui/core/Input';
+
 class RegisterPage extends Component {
   constructor(props) {
     super(props);
@@ -67,39 +72,43 @@ class RegisterPage extends Component {
 
   render() {
     return (
-      <div className="main">
+      <div>
         {this.renderAlert()}
-        <form onSubmit={this.registerUser}>
+        <div className="topLine"></div>
+        <div className="secondLine"></div>
+        <form onSubmit={this.registerUser} className="logging">
           <h1>Register User</h1>
           <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
+            <UserIcon />
+            <Input
+              placeholder="Username"
+              type="text"
+              name="username"
+              value={this.state.username}
+              onChange={this.handleInputChangeFor('username')}
+            />
           </div>
           <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
+            <Lock />
+            <Input
+              placeholder="Password"
+              type="password"
+              name="password"
+              value={this.state.password}
+              onChange={this.handleInputChangeFor('password')}
+            />
           </div>
-          <div>
-            <input
+          <div className="thirdLine">
+            <Button color="secondary"
               type="submit"
               name="submit"
               value="Register"
-            />
-            <Link to="/home">Cancel</Link>
+            >
+              Register
+            </Button>
+            <span style={{ padding: '5px' }}>
+              <Link to="/home">Cancel</Link>
+            </span>
           </div>
         </form>
       </div>

@@ -7,7 +7,6 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import Nav from '../../components/Nav/Nav';
 import ServiceSelector from '../ServiceSelector/ServiceSelector';
 
-//import for styling
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';

@@ -11,6 +11,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import orderBy from 'lodash/orderBy';
+
 //styles
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -52,6 +54,8 @@ class CompleteTable extends Component {
   render() {
     const { classes } = this.props;
 
+    const data = orderBy(this.props.customerList, ['pickUp'], ['asc'])
+
     return (
       <Paper className={classes.root}>
         <Table className={classes.table}>
@@ -66,7 +70,7 @@ class CompleteTable extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.customerList.map((customer, index) => {
+            {data.map((customer, index) => {
               if (customer.complete === true) {
                 return (
                   <TableRow className={classes.row} key={index}>

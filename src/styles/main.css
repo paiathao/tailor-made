@@ -1,7 +1,7 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
-    background-color: #f9f9f9;
+    background-color: #fafefb;
 }
 
 .header h1 {
@@ -10,12 +10,13 @@ body {
 }
 
 .header {
-    background-color: #BAC4BE;
+    background-color: #f9fefb;
     height: 280px;
     width: 90%;
     margin-top: 15px;
     margin-left: 5%;
     color: #ece7e7;
+    position: relative;
 }
 
 .navbar {
@@ -56,18 +57,9 @@ a:hover {
     padding-top: 10px;
 }
 
-
-/* form {
-    background-color: #dbd5d5;
-    width: 30%;
-    height: 250px;
-    margin: 20px auto;
-    padding: 25px;
-    border-radius: 2px;
-} */
-
 .main {
     width: 90%;
+    min-height: 430px;
     margin-top: 5px;
     margin-left: 5%;
     background-color: #e9eeef;
@@ -109,6 +101,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    float: right;
 }
 
 li {
@@ -131,10 +124,53 @@ li a:hover {
 }
 
 .footer {
-    background: #f9f9f9;
+    background: #fafefb;
     width: 90%;
     height: 10px;
     margin-left: 5%;
 }
 
+button:focus {
+    outline-color: #eee;
+}
 
+.wrapper {
+    text-align: center;
+    width: 100%;
+}
+
+.wrapper label {
+    position: initial;
+}
+
+.logging {
+    width: 25%;
+    height: 250px;
+    margin: auto;
+    color: #818298;
+    text-align: center;
+    font-family: 'Open Sans';
+    font-style: normal;
+}
+
+.topLine {
+    background-color: #818297;
+    height: 27px;
+    border-radius: 25px;
+    margin: auto;
+    margin-top: 10px;
+    width: 50%;
+}
+
+.secondLine {
+    background-color: #ffa782;
+    height: 20px;
+    border-radius: 25px;
+    margin: auto;
+    margin-top: 5px;
+    width: 40%;
+}
+
+.thirdLine {
+    margin-top: 10px;
+}

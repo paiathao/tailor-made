@@ -15,6 +15,7 @@ import CurrentOrders from './components/CurrentOrders/CurrentOrders';
 import CompleteOrders from './components/CompleteOrders/CompleteOrders';
 import CustomersBoard from './components/CustomersBoard/CustomersBoard';
 import BusinessReports from './components/BusinessReports/BusinessReports';
+import ManageUsers from './components/ManageUsers/ManageUsers';
 import Footer from './components/Footer/Footer'
 
 import './styles/main.css';
@@ -54,6 +55,10 @@ const App = () => (
           component={CustomersBoard}
         />
         <Route
+          path="/manage"
+          component={ManageUsers}
+        />
+        <Route
           path="/businessreports"
           component={BusinessReports}
         />
@@ -62,7 +67,7 @@ const App = () => (
 
       </Switch>
     </Router>
-    <Footer/>
+    <Footer />
   </div>
 );
 

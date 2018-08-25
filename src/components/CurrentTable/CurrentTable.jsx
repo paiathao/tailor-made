@@ -37,12 +37,14 @@ const styles = theme => ({
     overflowX: 'auto',
   },
   table: {
-    maxWidth: 700,
+    maxWidth: '100%',
+    tableLayout: 'fixed',
   },
   row: {
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.background.default,
     },
+    width: '100%',
   },
 });
 
@@ -135,12 +137,12 @@ class currentTable extends Component {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <CustomTableCell>Order #</CustomTableCell>
+              <CustomTableCell width="5">Order #</CustomTableCell>
               <CustomTableCell>Customer's Name</CustomTableCell>
-              <CustomTableCell>Phone</CustomTableCell>
+              <CustomTableCell width="180">Phone</CustomTableCell>
               <CustomTableCell>Service Details</CustomTableCell>
               <CustomTableCell>Drop-off Date</CustomTableCell>
-              <CustomTableCell>Due Date & Time</CustomTableCell>
+              <CustomTableCell width="170">Due Date & Time</CustomTableCell>
               <CustomTableCell>Total Cost</CustomTableCell>
               <CustomTableCell>Payment Receive</CustomTableCell>
               <CustomTableCell>Complete</CustomTableCell>

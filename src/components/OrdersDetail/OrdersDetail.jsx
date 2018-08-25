@@ -67,7 +67,7 @@ class OrdersDetail extends React.Component {
                         </Table>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary" autoFocus>
+                        <Button onClick={this.handleClose} autoFocus>
                             OK
               </Button>
                     </DialogActions>

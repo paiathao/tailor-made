@@ -38,9 +38,9 @@ class ServiceTotal extends Component {
         
         return (
             <div className="serviceCalc">
-                <p> Subtotal Cost: {this.sum.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} </p>
-                <p> Taxes: {this.tax.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} </p>
-                <p> Total Cost: {this.totalCost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} </p>
+                <p> <b>Subtotal Cost</b>: {this.sum.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} </p>
+                <p> <b>Taxes</b>: {this.tax.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} </p>
+                <p> <b>Total Cost</b>: {this.totalCost.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} </p>
             </div>
         );
     }

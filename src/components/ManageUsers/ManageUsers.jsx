@@ -24,7 +24,7 @@ class ManageUsers extends Component {
 
     if (this.props.user.userName) {
       content = (
-        <div>
+        <div className="main">
           <p>
           Manage Users
           </p>
