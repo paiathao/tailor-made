@@ -10,6 +10,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import Search from '@material-ui/icons/Search'
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 import orderBy from 'lodash/orderBy';
 
@@ -38,8 +41,14 @@ const styles = theme => ({
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.background.default,
     },
+    textField: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+      width: 230,
+    },
   },
 });
+
 
 const mapStateToProps = state => ({
   customerList: state.customerList
@@ -52,6 +61,7 @@ class CustomerTable extends Component {
 
     this.state = {
       id: [],
+      query: '',
     }
   }
 
@@ -63,13 +73,40 @@ class CustomerTable extends Component {
     this.props.dispatch({ type: 'UPDATE_STATUS', payload: id });
   }
 
+  handleChangeQuery = (event) => {
+    this.setState({ query: event.target.value });
+  }
+
   render() {
     const { classes } = this.props;
+    let lowerCaseQuery = this.state.query.toLowerCase()
 
-    const data = orderBy(this.props.customerList, ['firstName'], ['asc'])
+    console.log(lowerCaseQuery)
+
+    const data = orderBy(
+      this.state.query ? 
+      this.props.customerList.filter( 
+        customer => customer.firstName.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1 
+        || customer.lastName.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
+      ) :  this.props.customerList, ['firstName'], ['asc']
+    )
 
     return (
       <Paper className={classes.root}>
+        <TextField
+          style={{float: 'right', padding: '15px'}}
+          placeholder="Search"
+          className={classes.textField}
+          value={this.state.query}
+          onChange={this.handleChangeQuery}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment>
+                 <Search/>
+              </InputAdornment>
+            ),
+          }} 
+          />
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
@@ -89,7 +126,7 @@ class CustomerTable extends Component {
                   <CustomTableCell>{customer.lastName}</CustomTableCell>
                   <CustomTableCell>{customer.phone}</CustomTableCell>
                   <CustomTableCell>
-                      <EditButton customer={customer}/>
+                    <EditButton customer={customer} />
                   </CustomTableCell>
                 </TableRow>
               );
