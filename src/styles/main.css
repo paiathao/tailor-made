@@ -47,6 +47,19 @@ a:hover {
     text-decoration: none;
 }
 
+.logoutButton {
+    border: none;
+    text-align: center;
+    display: block;
+    padding: 14px 16px;
+    color: #a8b3ad;
+}
+
+.logoutButton:hover {
+    text-decoration: underline;
+    color: #eee;
+} 
+
 .serviceList {
     padding-top: 15px;
     color: #818298;

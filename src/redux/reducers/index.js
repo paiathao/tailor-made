@@ -82,7 +82,7 @@ const newCustomer = (state = defaultState, action) => {
 
 const calendarTask = (state = [], action) => {
   switch (action.type) {
-    case 'SET_CUSTOMERCALANDER':
+    case 'SET_CUSTOMERCALENDER':
       return action.payload
     default:
       return state;

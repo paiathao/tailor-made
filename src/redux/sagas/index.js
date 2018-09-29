@@ -55,17 +55,17 @@ function* fetchCustomers() {
     })
     let mapData = [];
     customerList.data.forEach(element => {
-      let date = new Date(element.pickUp);
-      let endDate = moment(date).add(30, 'm').toDate();
+      let startDate = new Date(element.pickUp);
+      let endDate = moment(startDate).add(30, 'm').toDate();
       mapData.push({
         'title': element.firstName + " " + element.lastName,
-        'start': new Date(element.pickUp),
+        'start': startDate,
         'end': endDate
       })
     })
 
     yield dispatch({
-      type: 'SET_CUSTOMERCALANDER',
+      type: 'SET_CUSTOMERCALENDER',
       payload: mapData
     })
 

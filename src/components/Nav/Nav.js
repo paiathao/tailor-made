@@ -58,11 +58,11 @@ class Nav extends Component {
           </Link>
             </li>
             <li>
-              <a
+              <button class="logoutButton"
                 onClick={this.logout}
               >
                 Log Out
-              </a>
+              </button>
             </li>
           </ul>
 
