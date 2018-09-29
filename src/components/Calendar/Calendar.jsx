@@ -34,7 +34,7 @@ class Calendar extends Component {
 
         console.log(this.props.calendarTask)
 
-        const events = this.props.calendarTask
+        let events = this.props.calendarTask
 
         if (this.props.user.userName) {
             content = (

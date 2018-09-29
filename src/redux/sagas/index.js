@@ -3,6 +3,7 @@ import userSaga from './userSaga';
 import loginSaga from './loginSaga';
 import axios from 'axios';
 import { element } from 'prop-types';
+import moment from "moment";
 
 
 export default function* rootSaga() {
@@ -54,10 +55,12 @@ function* fetchCustomers() {
     })
     let mapData = [];
     customerList.data.forEach(element => {
+      let date = new Date(element.pickUp);
+      let endDate = moment(date).add(30, 'm').toDate();
       mapData.push({
         'title': element.firstName + " " + element.lastName,
-        'start': new Date(new Date(element.pickUp)),
-        'end': new Date(new Date(element.pickUp))
+        'start': new Date(element.pickUp),
+        'end': endDate
       })
     })
 
