@@ -42,9 +42,14 @@ class Nav extends Component {
                 Customers
           </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/manage">
                 Manage Users
+          </Link>
+            </li> */}
+            <li>
+              <Link to="/calendar">
+                Calendar
           </Link>
             </li>
             <li>
@@ -53,7 +58,7 @@ class Nav extends Component {
           </Link>
             </li>
             <li>
-              <a 
+              <a
                 onClick={this.logout}
               >
                 Log Out

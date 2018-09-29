@@ -32,7 +32,7 @@ class LoginPage extends Component {
 
   componentDidUpdate() {
     if (!this.props.user.isLoading && this.props.user.userName !== null) {
-      this.props.history.push('dashboard');
+      this.props.history.push('neworder');
     }
   }
 
@@ -87,6 +87,7 @@ class LoginPage extends Component {
           <div>
             <Lock />
             <Input
+              style={{ marginTop: '10px' }}
               placeholder="Password"
               type="password"
               name="password"

@@ -80,12 +80,22 @@ const newCustomer = (state = defaultState, action) => {
   }
 }
 
+const calendarTask = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_CUSTOMERCALANDER':
+      return action.payload
+    default:
+      return state;
+  }
+}
+
 const store = combineReducers({
   user,
   login,
   serviceList,
   newCustomer,
-  customerList
+  customerList,
+  calendarTask
 });
 
 export default store;
