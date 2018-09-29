@@ -102,7 +102,8 @@ class CustomerTable extends Component {
           InputProps={{
             startAdornment: (
               <InputAdornment>
-                 <Search/>
+                 <Search style={{color: '#818298'}}
+                 />
               </InputAdornment>
             ),
           }} 

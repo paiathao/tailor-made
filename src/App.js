@@ -16,8 +16,8 @@ import CompleteOrders from './components/CompleteOrders/CompleteOrders';
 import CustomersBoard from './components/CustomersBoard/CustomersBoard';
 import BusinessReports from './components/BusinessReports/BusinessReports';
 import ManageUsers from './components/ManageUsers/ManageUsers';
+import Calendar from './components/Calendar/Calendar';
 import Footer from './components/Footer/Footer'
-
 import './styles/main.css';
 
 const App = () => (
@@ -61,6 +61,10 @@ const App = () => (
         <Route
           path="/businessreports"
           component={BusinessReports}
+        />
+        <Route
+          path="/calendar"
+          component={Calendar}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />

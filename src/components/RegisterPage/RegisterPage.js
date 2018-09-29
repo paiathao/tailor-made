@@ -91,6 +91,7 @@ class RegisterPage extends Component {
           <div>
             <Lock />
             <Input
+              style={{ marginTop: '10px' }}
               placeholder="Password"
               type="password"
               name="password"

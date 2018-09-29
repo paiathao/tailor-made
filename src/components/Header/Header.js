@@ -3,7 +3,7 @@ import React from 'react';
 const Header = ({ title }) => (
   <div className="header">
     <div>
-    <img src={require('/Users/paiathao/prime/Solo Project/tailor-made/src/images/header5.png')} alt="banner"/>
+    <img src={require('/Users/paiathao/prime/solo-project/tailor-made/src/images/header5.png')} alt="banner"/>
     
     </div>
   </div>

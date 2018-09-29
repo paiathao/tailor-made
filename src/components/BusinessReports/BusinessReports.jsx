@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import Reports from '../Reports/Reports'
 
 const mapStateToProps = state => ({
   user: state.user,
+  customerList: state.customerList
 });
 
 class BusinessReports extends Component {
@@ -26,7 +28,7 @@ class BusinessReports extends Component {
     if (this.props.user.userName) {
       content = (
         <div className="main">
-        
+          <Reports />
         </div>
       );
     }

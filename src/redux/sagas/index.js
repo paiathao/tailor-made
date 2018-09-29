@@ -2,6 +2,7 @@ import { all, takeEvery, call, put as dispatch } from 'redux-saga/effects';
 import userSaga from './userSaga';
 import loginSaga from './loginSaga';
 import axios from 'axios';
+import { element } from 'prop-types';
 
 
 export default function* rootSaga() {
@@ -46,11 +47,27 @@ function* fetchServices() {
 
 function* fetchCustomers() {
   try {
-    const customerList = yield call(axios.get, '/api/customer')
+    let customerList = yield call(axios.get, '/api/customer')
     yield dispatch({
       type: 'GET_CUSTOMER',
       payload: customerList.data
     })
+    let mapData = [];
+    customerList.data.forEach(element => {
+      mapData.push({
+        'title': element.firstName + " " + element.lastName,
+        'start': new Date(new Date(element.pickUp)),
+        'end': new Date(new Date(element.pickUp))
+      })
+    })
+
+    yield dispatch({
+      type: 'SET_CUSTOMERCALANDER',
+      payload: mapData
+    })
+
+    
+
   } catch (err) {
     yield console.log(err);
   }
