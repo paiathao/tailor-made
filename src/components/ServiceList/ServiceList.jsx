@@ -59,7 +59,6 @@ class ServiceList extends Component {
     }
 
     handleClick = (service => {
-        console.log('click', service)
         const getAlert = () => (
           <SweetAlert
           warning

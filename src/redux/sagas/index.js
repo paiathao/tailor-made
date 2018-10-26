@@ -60,7 +60,8 @@ function* fetchCustomers() {
       mapData.push({
         'title': element.firstName + " " + element.lastName,
         'start': startDate,
-        'end': endDate
+        'end': endDate,
+        'orderDetails': element.orderDetails
       })
     })
 

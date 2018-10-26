@@ -79,9 +79,6 @@ class CustomerTable extends Component {
 
   render() {
     const { classes } = this.props;
-    let lowerCaseQuery = this.state.query.toLowerCase()
-
-    console.log(lowerCaseQuery)
 
     const data = orderBy(
       this.state.query ? 

@@ -109,7 +109,6 @@ class NewOrder extends Component {
   };
 
   handleSubmit = () => {
-    console.log(this.state.newCustomer)
     this.props.dispatch({
       type: 'ADD_CUSTOMER',
       payload: this.state.newCustomer
